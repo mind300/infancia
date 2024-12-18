@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignIdFor(City::class);
             $table->foreignId('manager_id')->constrained('users');
             $table->foreignId('nursery_id')->constrained('nurseries');
+            $table->boolean('main')->default(false);
             $table->timestamps();
         });
     }

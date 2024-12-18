@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Branch;
 use App\Models\Nursery;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('password');
             $table->foreignIdFor(Nursery::class)->nullable();
+            $table->foreignIdFor(Branch::class)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('device_token')->nullable();
             $table->rememberToken();

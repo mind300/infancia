@@ -10,7 +10,7 @@ if (!function_exists('authResponse')) {
             'email' => auth_user()->email,
             'phone' => auth_user()->phone,
             'nursery_id' => auth_user()->nursery_id,
-            'main_branch_id' => 1,
+            'branch_id' => auth_user()->branch_id,
             'role' => 'owner',
             'token' => $token,
             'message' => $message,

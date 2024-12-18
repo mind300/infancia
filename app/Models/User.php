@@ -78,6 +78,15 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(Nursery::class);
     }
+
+    /**
+     * The Comment
+     */
+    public function branch()
+    {
+        return $this->hasOne(Branch::class);
+    }
+
     /**
      * The Comment
      */
