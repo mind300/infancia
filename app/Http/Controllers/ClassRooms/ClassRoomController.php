@@ -6,15 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ClassRooms\ClassRoomRequest;
 use App\Models\Branch;
 use App\Models\ClassRoom;
+use Illuminate\Http\Request;
 
 class ClassRoomController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Branch $branch)
+    public function index(Request $request)
     {
-        $classrooms = ClassRoom::where('branch_id', $branch->id)->paginate(10);
+        $branch_id = $request->branch_id;
+        $classrooms = ClassRoom::where('branch_id', $branch_id)->paginate(10);
         return contentResponse($classrooms);
     }
 
