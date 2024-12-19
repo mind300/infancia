@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('content');
             $table->boolean('is_private')->default(false);
             $table->foreignId('class_room_id')->nullable()->constrained('class_rooms');
+            $table->foreignId('branch_id')->constrained('branches');
             $table->timestamps();
         });
     }

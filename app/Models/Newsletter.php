@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Newsletter extends BaseModel
 {
     /**
@@ -17,5 +15,6 @@ class Newsletter extends BaseModel
         'is_private',
         'nursery_id',
         'branch_id',
+        'class_room_id'
     ];
 }

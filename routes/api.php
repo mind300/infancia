@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Branches\BranchController;
 use App\Http\Controllers\ClassRooms\ClassRoomController;
 use App\Http\Controllers\Kids\KidController;
+use App\Http\Controllers\Newsletters\NewsletterController;
 use App\Http\Controllers\Parents\ParentController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,8 +46,12 @@ Route::group(['middleware' => 'api'], function () {
         Route::apiResource('parents', ParentController::class);
         Route::post('parents/{parent}', [ParentController::class, 'update'])->name('parents.update');
 
-        // Kid Controllerv
+        // Kid Controller
         Route::apiResource('kids', KidController::class);
         Route::post('kids/{kid}', [KidController::class, 'update'])->name('kids.update');
+
+        // Newsletter Controller
+        Route::apiResource('newsletters', NewsletterController::class);
+        Route::post('newsletters/{newsletter}', [NewsletterController::class, 'update'])->name('newsletters.update');
     });
 });

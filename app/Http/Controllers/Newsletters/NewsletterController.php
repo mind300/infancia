@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Newsletters;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Newsletters\NewsletterRequest;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
 
@@ -14,26 +15,18 @@ class NewsletterController extends Controller
     public function index(Request $request)
     {
         $branch_id = $request->branch_id;
-        $nursery_d = $request->nursery_d;
         $class_room_id = $request->class_room_id;
-        $newsletters = Newsletter::orWhere(['nursery_id', $nursery_d], ['branch_id', $branch_id], ['class_room_id', $class_room_id], ['is_private', 'yes']);
+        $newsletters = Newsletter::orWhere([['branch_id', $branch_id], ['class_room_id', $class_room_id], ['is_private', 0]])->get();
         return contentResponse($newsletters);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NewsletterRequest $request)
     {
-        //
+        $newsletter = Newsletter::create($request->validated());
+        return messageResponse();
     }
 
     /**
@@ -41,23 +34,17 @@ class NewsletterController extends Controller
      */
     public function show(Newsletter $newsletter)
     {
-        //
+        return contentResponse($newsletter);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Newsletter $newsletter)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Newsletter $newsletter)
+    public function update(NewsletterRequest $request, Newsletter $newsletter)
     {
-        //
+        $newsletter->update($request->valiadated());
+        return messageResponse();
     }
 
     /**
@@ -65,6 +52,7 @@ class NewsletterController extends Controller
      */
     public function destroy(Newsletter $newsletter)
     {
-        //
+        $newsletter->forceDelete();
+        return messageResponse();
     }
 }
