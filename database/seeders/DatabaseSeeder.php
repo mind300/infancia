@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         
-        Nursery::factory()->create([
+        Nursery::create([
             'name' => 'Nursery 1',
             'email' => 'nursery1@gmail.com',
             'phone' => '01000111222',
@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
             'branches_number' => 20,
         ]);
 
-        Nursery::factory()->create([
+        Nursery::create([
             'name' => 'Nursery 2',
             'email' => 'nursery2@gmail.com',
-            'phone' => '01000111222',
+            'phone' => '01000111333',
             'city_id' => 1,
             'country_id' => 1,
             'address' => 'Helioplis',
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'branches_number' => 20,
         ]);
 
-        User::factory()->create([
+        User::create([
             'name' => 'Nursery 1',
             'email' => 'nursery1@gmail.com',
             'phone' => '01000111222',
@@ -46,17 +46,9 @@ class DatabaseSeeder extends Seeder
             'nursery_id' => 1,
         ]);
 
-        User::factory()->create([
-            'name' => 'Nursery 1',
-            'email' => 'nursery1@gmail.com',
-            'phone' => '01000111222',
-            'password' => '12345test',
-            'nursery_id' => 1,
-        ]);
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'nursery@gmail.com',
+        User::create([
+            'name' => 'Nursery 2',
+            'email' => 'nursery2@gmail.com',
             'phone' => '01000111333',
             'password' => '12345test',
             'nursery_id' => 2,

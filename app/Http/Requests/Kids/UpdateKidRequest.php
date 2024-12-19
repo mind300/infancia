@@ -4,7 +4,7 @@ namespace App\Http\Requests\Kids;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class KidRequest extends FormRequest
+class UpdateKidRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,6 @@ class KidRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // Kid Validations
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'birth_date' => 'required|date',

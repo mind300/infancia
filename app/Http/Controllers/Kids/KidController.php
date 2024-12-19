@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Kids;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Kids\KidRequest;
-use App\Models\Branch;
+
 use App\Models\Kid;
-use App\Models\ParentKid;
 use App\Models\User;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Http\Request;
+use App\Http\Requests\Kids\StoreKidRequest;
+use App\Http\Requests\Kids\UpdateKidRequest;
 
 class KidController extends Controller
 {
@@ -30,7 +32,7 @@ class KidController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(KidRequest $request)
+    public function store(StoreKidRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -62,7 +64,7 @@ class KidController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(KidRequest $request, Kid $kid)
+    public function update(UpdateKidRequest $request, Kid $kid)
     {
         $kid->update($request->validated());
         return messageResponse();
