@@ -11,7 +11,7 @@ class MealRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class MealRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'meal' => 'required|string',
+            'type' => 'required|string',
+            'branch_id' => 'required||integer|exists:branches,id',
+            'nursery_id' => 'required||integer|exists:nurseries,id'
         ];
     }
 }

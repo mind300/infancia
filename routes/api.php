@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Branches\BranchController;
 use App\Http\Controllers\ClassRooms\ClassRoomController;
 use App\Http\Controllers\Kids\KidController;
+use App\Http\Controllers\Meals\MealController;
 use App\Http\Controllers\Newsletters\NewsletterController;
 use App\Http\Controllers\Parents\ParentController;
 use App\Http\Controllers\Subjects\SubjectController;
@@ -57,5 +58,8 @@ Route::group(['middleware' => 'api'], function () {
 
         // Subject Controller
         Route::apiResource('subjects', SubjectController::class);
+
+        // Meal Controller
+        Route::apiResource('meals', MealController::class);
     });
 });
