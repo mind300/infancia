@@ -29,7 +29,7 @@ class AuthController extends Controller
     {
         $token = auth()->attempt($request->safe()->only('email', 'password'));
         if (!$token) {
-            return messageResponse('Email or password incorrect.');
+            return messageResponse('Email or password incorrect.', false, 422);
         }
         return authResponse($token);
     }

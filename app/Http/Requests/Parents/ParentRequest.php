@@ -39,6 +39,7 @@ class ParentRequest extends FormRequest
             'kids.*.first_name' => 'required|string',
             'kids.*.last_name' => 'required|string',
             'kids.*.birth_date' => 'required|date',
+            'kids.*.gender' => 'required|string|in:boy,girl',
             'kids.*.has_medical_case' => 'nullable|string|in:yes,no',
             'kids.*.description_medical_case' => 'required_with:kids.*.has_medical_case|string',
             'kids.*.classroom_id' => 'required|integer|exists:class_rooms,id',

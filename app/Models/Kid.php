@@ -15,6 +15,7 @@ class Kid extends BaseModel
         'first_name',
         'last_name',
         'birth_date',
+        'gender',
         'has_medical_case',
         'description_medical_case',
         'parent_id',

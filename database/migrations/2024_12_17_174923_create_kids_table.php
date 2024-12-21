@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->date('birth_date');
+            $table->enum('gender', ['boy', 'girl']);
             $table->string('has_medical_case')->default('no');
             $table->longText('description_medical_case')->nullable();
             $table->foreignId('parent_id')->constrained('parent_kids')->cascadeOnDelete();

@@ -58,7 +58,7 @@ class ParentController extends Controller
             $parent->kids()->upsert(
                 $kidsData,
                 ['id'],
-                ['first_name', 'last_name', 'birth_date', 'has_medical_case', 'description_medical_case']
+                ['first_name', 'last_name', 'birth_date', 'gender', 'has_medical_case', 'description_medical_case']
             );
 
             DB::commit();

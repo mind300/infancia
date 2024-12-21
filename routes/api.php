@@ -6,6 +6,7 @@ use App\Http\Controllers\ClassRooms\ClassRoomController;
 use App\Http\Controllers\Kids\KidController;
 use App\Http\Controllers\Newsletters\NewsletterController;
 use App\Http\Controllers\Parents\ParentController;
+use App\Http\Controllers\Subjects\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,5 +54,8 @@ Route::group(['middleware' => 'api'], function () {
         // Newsletter Controller
         Route::apiResource('newsletters', NewsletterController::class);
         Route::post('newsletters/{newsletter}', [NewsletterController::class, 'update'])->name('newsletters.update');
+
+        // Subject Controller
+        Route::apiResource('subjects', SubjectController::class);
     });
 });
