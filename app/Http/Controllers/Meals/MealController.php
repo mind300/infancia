@@ -14,9 +14,7 @@ class MealController extends Controller
      */
     public function index(Request $request)
     {
-        $branch_id = $request->branch_id;
-        $class_room_id = $request->class_room_id;
-        $meals = Meal::orWhere([['branch_id', $branch_id], ['class_room_id', $class_room_id]])->get();
+        $meals = Meal::branch($request)->get();
         return contentResponse($meals);
     }
 

@@ -13,8 +13,8 @@ class Newsletter extends BaseModel
         'title',
         'content',
         'is_private',
-        'nursery_id',
+        'class_room_id',
         'branch_id',
-        'class_room_id'
+        'nursery_id',
     ];
 }

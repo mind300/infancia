@@ -18,6 +18,7 @@ return new class extends Migration
             $table->boolean('is_private')->default(false);
             $table->foreignId('class_room_id')->nullable()->constrained('class_rooms');
             $table->foreignId('branch_id')->constrained('branches');
+            $table->foreignId('nursery_id')->constrained('nurseries');
             $table->timestamps();
         });
     }
