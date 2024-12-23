@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use phpDocumentor\Reflection\Types\Parent_;
-
 class Kid extends BaseModel
 {
     /**
@@ -56,5 +54,13 @@ class Kid extends BaseModel
     public function classRoom()
     {
         return $this->belongsTo(ClassRoom::class);
+    }
+
+    /**
+     * The Comment
+     */
+    public function paymentBills()
+    {
+        return $this->belongsToMany(PaymentBill::class, 'kids_payment_bill');
     }
 }

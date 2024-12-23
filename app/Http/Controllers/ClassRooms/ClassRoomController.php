@@ -4,7 +4,6 @@ namespace App\Http\Controllers\ClassRooms;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClassRooms\ClassRoomRequest;
-use App\Models\Branch;
 use App\Models\ClassRoom;
 use Illuminate\Http\Request;
 
@@ -15,8 +14,7 @@ class ClassRoomController extends Controller
      */
     public function index(Request $request)
     {
-        $branch_id = $request->branch_id;
-        $classrooms = ClassRoom::where('branch_id', $branch_id)->paginate(10);
+        $classrooms = ClassRoom::branchScope($request)->paginate(10);
         return contentResponse($classrooms);
     }
 

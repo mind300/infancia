@@ -14,7 +14,7 @@ class MealController extends Controller
      */
     public function index(Request $request)
     {
-        $meals = Meal::branch($request)->get();
+        $meals = Meal::branchScope($request)->get();
         return contentResponse($meals);
     }
 

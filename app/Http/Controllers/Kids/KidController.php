@@ -20,12 +20,7 @@ class KidController extends Controller
      */
     public function index(Request $request)
     {
-        $branch_id = $request->branch_id;
-        $nursery_id = $request->nursery_id;
-        $kids = Kid::orWhere([
-            ['nursery_id', $nursery_id],
-            ['branch_id', $branch_id]
-        ])->paginate(10);
+        $kids = Kid::branchScope($request)->paginate(10);
         return contentResponse($kids->load('parent'));
     }
 
@@ -37,7 +32,7 @@ class KidController extends Controller
         DB::beginTransaction();
         try {
             // Create the user
-            $user = User::create(array_merge($request->validated(), ['password' => bcrypt('12345test')]));
+            $user = User::create($request->validated() + ['password' => bcrypt('12345test')]);
 
             // Create parent data
             $parent = $user->parent()->create($request->safe()->except(['name', 'email']));

@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class BaseModel extends Model
+class BaseModel extends Model implements HasMedia
 {
     // Uses
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, InteractsWithMedia;
 
 
     // =================================== Relations ================================= //
@@ -22,7 +24,7 @@ class BaseModel extends Model
     /**
      * Scope a query to only include branches.
      */
-    public function scopeBranch(Builder $query, $request): void
+    public function scopeBranchScope(Builder $query, $request): void
     {
         $query->orWhere([['branch_id', $request->branch_id], ['nursery_id', $request->nursery_id]]);
     }

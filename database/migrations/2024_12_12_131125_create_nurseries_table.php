@@ -22,8 +22,10 @@ return new class extends Migration
             $table->foreignIdFor(Country::class);
             $table->foreignIdFor(City::class);
             $table->string('address');
-            $table->string('about')->nullable();
+            $table->longText('about')->nullable();
             $table->integer('branches_number')->default(0);
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->boolean('generate_branch')->default(false);
             $table->foreignIdFor(User::class)->nullable()->cascadeOnDelete();
             $table->timestamps();
         });

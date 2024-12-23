@@ -7,6 +7,7 @@ use App\Http\Controllers\Kids\KidController;
 use App\Http\Controllers\Meals\MealController;
 use App\Http\Controllers\Newsletters\NewsletterController;
 use App\Http\Controllers\Parents\ParentController;
+use App\Http\Controllers\PaymentBills\PaymentBillController;
 use App\Http\Controllers\Subjects\SubjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,5 +62,9 @@ Route::group(['middleware' => 'api'], function () {
 
         // Meal Controller
         Route::apiResource('meals', MealController::class);
+
+        // Meal Controller
+        Route::apiResource('payemntbills', PaymentBillController::class);
+        Route::post('payemntbills/{paymentBill}', [PaymentBillController::class, 'update'])->name('payemntbills.update');
     });
 });

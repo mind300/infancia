@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class Nursery extends BaseModel
 {
     /**
@@ -23,7 +25,6 @@ class Nursery extends BaseModel
     ];
 
     // =================================== Relations ================================= //
-
     /**
      * The Comment
      */
@@ -37,7 +38,7 @@ class Nursery extends BaseModel
      */
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -46,5 +47,20 @@ class Nursery extends BaseModel
     public function services()
     {
         return $this->hasMany(Service::class);
+    }
+
+    // =================================== Scopes ================================= //
+    public function scopeStatus(Builder $query, $status): void
+    {
+        $query->whereAny('status', $status);
+    }
+
+    // =================================== Spatie ================================= //
+    /**
+     * Spatie media library register
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('nursery')->singleFile();
     }
 }

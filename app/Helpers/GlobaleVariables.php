@@ -15,6 +15,16 @@ if (!function_exists('auth_user_id')) {
         return auth()->id();
     }
 }
+
+// Nursery
+if (!function_exists('nursery')) {
+    function nursery()
+    {
+        return auth()->user()->nursery;
+    }
+}
+
+
 // Nursery ID
 if (!function_exists('nursery_id')) {
     function nursery_id()

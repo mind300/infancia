@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Nurseries\NurseryRequest;
 use App\Models\Nursery;
 use Illuminate\Http\Request;
 
@@ -12,15 +13,7 @@ class NurseryController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $nurseries = Nursery::status('pending')->paginate(10);
     }
 
     /**
@@ -28,7 +21,8 @@ class NurseryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nursery = Nursery::create($request->validated());
+        return messageResponse();
     }
 
     /**
@@ -36,23 +30,17 @@ class NurseryController extends Controller
      */
     public function show(Nursery $nursery)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Nursery $nursery)
-    {
-        //
+        return contentResponse($nursery);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Nursery $nursery)
+    public function update(NurseryRequest $request, Nursery $nursery)
     {
-        //
+        $nursery->update($request->validated());
+        $nursery->user()->update($request->validated());
+        return messageResponse();
     }
 
     /**
@@ -60,6 +48,7 @@ class NurseryController extends Controller
      */
     public function destroy(Nursery $nursery)
     {
-        //
+        $nursery->forceDelete();
+        return messageResponse();
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Parents;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Parents\ParentRequest;
-use App\Models\Branch;
 use App\Models\ParentKid;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,9 +16,7 @@ class ParentController extends Controller
      */
     public function index(Request $request)
     {
-        $branch_id = $request->branch_id;
-        $nursery_id = $request->nursery_id;
-        $parents = ParentKid::orWhere([['branch_id', $branch_id], ['nursery_id', $nursery_id]])->withCount('kids')->paginate(10);
+        $parents = ParentKid::branchScope($request)->withCount('kids')->paginate(10);
         return contentResponse($parents);
     }
 

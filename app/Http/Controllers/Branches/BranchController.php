@@ -13,7 +13,7 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $branches = Branch::where('nursery_id', nursery_id())->paginate(10);
+        $branches = Branch::whereBelongsTo(nursery())->get();
         return contentResponse($branches);
     }
 
@@ -23,6 +23,7 @@ class BranchController extends Controller
     public function store(BranchRequest $request)
     {
         $branch = Branch::create($request->validated());
+        $branch->manager()->create($request->validated() + ['password' => '12345test']);
         return messageResponse();
     }
 

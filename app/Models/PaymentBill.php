@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-
-class Branch extends BaseModel
+class PaymentBill extends BaseModel
 {
     /**
      * The attributes that are mass assignable.
@@ -12,11 +10,10 @@ class Branch extends BaseModel
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'country_id',
-        'city_id',
-        'address',
-        'manager_id',
+        'title',
+        'desciprtion',
+        'status',
+        'branch_id',
         'nursery_id',
     ];
 
@@ -33,16 +30,8 @@ class Branch extends BaseModel
     /**
      * The Comment
      */
-    public function manager()
+    public function kids()
     {
-        return $this->belongsTo(User::class, 'manager_id');
-    }
-
-    /**
-     * The Comment
-     */
-    public function classes()
-    {
-        return $this->hasMany(Nursery::class);
+        return $this->belongsToMany(Kid::class, 'kids_payment_bill');
     }
 }

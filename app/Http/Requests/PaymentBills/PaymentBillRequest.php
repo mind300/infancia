@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Branches;
+namespace App\Http\Requests\PaymentBills;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BranchRequest extends FormRequest
+class PaymentBillRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,14 @@ class BranchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|string',
-            'email' => 'required|email:filter|unique:users,email',
-            'phone' => 'required|string|unique:users,phone',
-            'country_id' => 'required|integer',
-            'city_id' => 'required|integer',
-            'address' => 'nullable|string',
+            //
+            'title' => 'required|string',
+            'descirption' => 'required|string',
+            'status' => 'required|string|in:mandatory,optional',
+            'branch_id' => 'required|integer|exists:branches,id',
             'nursery_id' => 'required|integer|exists:nurseries,id',
+            'kids' => 'required|array',
+            'kids.*.id' => 'required|integer|exists:kids,id',
         ];
     }
 }

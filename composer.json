@@ -13,6 +13,7 @@
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "spatie/laravel-medialibrary": "^11.11",
         "tymon/jwt-auth": "^2.1"
     },
     "require-dev": {
@@ -33,7 +34,8 @@
         },
         "files": [
             "app/Helpers/ResponseFormat.php",
-            "app/Helpers/GlobaleVariables.php"
+            "app/Helpers/GlobaleVariables.php",
+            "app/Helpers/MethodsHelper.php"
         ]
     },
     "autoload-dev": {

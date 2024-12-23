@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Nurseries;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class NurseryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,10 +22,10 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // Nursery Register Validations
+            // Validations Nursery
             'name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
-            'phone' => 'required|string|unique:users,phone',
+            'email' => 'required|string|unique:users,email,' . nursery_id(),
+            'phone' => 'required|string|unique:users,phone,' . nursery_id(),
             'country_id' => 'required|integer',
             'city_id' => 'required|integer',
             'address' => 'required|string',
@@ -33,7 +33,6 @@ class RegisterRequest extends FormRequest
             'branches_number' => 'nullable|integer',
             'services' => 'nullable|array',
             'services.*.service' => 'required|string',
-            'generate_branch' => 'nullable|integer'
         ];
     }
 }

@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('payment_bills', function (Blueprint $table) {
             $table->id();
-            $table->string('content');
+            $table->string('title');
+            $table->longText('descirption')->nullable();
             $table->foreignId('nursery_id')->constrained('nurseries');
+            $table->foreignId('branch_id')->constrained('branches');
+            $table->enum('status', ['mandatory', 'optional']);
             $table->timestamps();
         });
     }
@@ -24,6 +27,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('payment_bills');
     }
 };
+
+
+
