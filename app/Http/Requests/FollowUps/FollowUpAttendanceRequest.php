@@ -24,7 +24,8 @@ class FollowUpAttendanceRequest extends FormRequest
         return [
             //
             'kid_id' => 'required|integer|exists:kids,id',
-            'class_room_id' => 'required|integer|exists:class_rooms,id'
+            'class_room_id' => 'required|integer|exists:class_rooms,id',
+            'branch_id' => 'required|integer|exists:branches,id'
         ];
     }
 }

@@ -35,9 +35,11 @@ class FollowUpController extends Controller
         $date = Carbon::parse($request->date);
         $attendance = Attendance::where('kid_id', $request->kid_id)->whereDate('created_at', $date)->first();
         if (!$attendance) {
-            Attendance::create($request->validated());
+            $attendance = Attendance::create($request->validated());
+            $attendance->kid->followup()->create($request->validated());
         } else {
             $attendance->forceDelete();
+            $attendance->kid->followup()->whereDate('created_at', $date)->delete();
         }
         return messageResponse();
     }
@@ -56,8 +58,10 @@ class FollowUpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FollowUp $followUp)
+    public function show(Request $request, Kid $followup)
     {
+        $date = Carbon::parse($request->date);
+        $followUp = FollowUp::where('kid_id', $followup->id)->whereDate('created_at', $date)->first();
         return contentResponse($followUp);
     }
 
