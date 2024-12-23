@@ -25,8 +25,8 @@ class ClassRoomRequest extends FormRequest
             'name' => 'required|string',
             'from' => 'required|integer',
             'to' => 'required|integer',
-            'has_meals' => 'required|string|in:yes,no',
-            'has_subjects' => 'required|string|in:yes,no',
+            'has_meals' => 'required|string|in:0,1',
+            'has_subjects' => 'required|string|in:0,1',
             'branch_id' => 'required|integer|exists:branches,id',
             'nursery_id' => 'required|integer|exists:nurseries,id',
         ];
