@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_rooms', function (Blueprint $table) {
+        Schema::create('payment_bills', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('from')->default(0);
-            $table->integer('to')->default(0);
-            $table->boolval('has_meals')->default(false);
-            $table->boolval('has_subjects')->default(false);
-            $table->foreignId('branch_id')->constrained('branches');
+            $table->string('title');
+            $table->longText('descirption')->nullable();
             $table->foreignId('nursery_id')->constrained('nurseries');
+            $table->foreignId('branch_id')->constrained('branches');
+            $table->enum('status', ['mandatory', 'optional']);
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_rooms');
+        Schema::dropIfExists('payment_bills');
     }
 };

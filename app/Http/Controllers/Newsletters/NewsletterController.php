@@ -14,7 +14,7 @@ class NewsletterController extends Controller
      */
     public function index(Request $request)
     {
-        $newsletters = Newsletter::brancScope($request)->orWhere([['class_room_id', $request->class_room_id], ['is_private', 0]])->get();
+        $newsletters = Newsletter::branchScope($request)->orWhere([['class_room_id', $request->class_room_id], ['is_private', 0]])->get();
         return contentResponse($newsletters);   
     }
 

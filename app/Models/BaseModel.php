@@ -26,6 +26,17 @@ class BaseModel extends Model implements HasMedia
      */
     public function scopeBranchScope(Builder $query, $request): void
     {
-        $query->orWhere([['branch_id', $request->branch_id], ['nursery_id', $request->nursery_id]]);
+        if ($request->has('class_room_id')) {
+            $query->orWhere([['branch_id', $request->branch_id], ['nursery_id', $request->nursery_id], ['class_room_id', $request->class_room_id]]);
+        } else {
+            $query->orWhere([['branch_id', $request->branch_id], ['nursery_id', $request->nursery_id]]);
+        }
+    }
+    /**
+     * Scope a query to only include class.
+     */
+    public function scopeClassScope(Builder $query, $request): void
+    {
+        $query->where('class_room_id', $request->class_room_id);
     }
 }

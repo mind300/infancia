@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Models;
+
+
+class FollowUp extends BaseModel
+{
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'napping',
+        'daiper',
+        'potty',
+        'toilet',
+        'moods',
+        'comment',
+        'kid_id',
+        'branch_id',
+        'nursery_id',
+    ];
+
+    // =================================== Relations ================================= //
+    /**
+     * The Comment
+     */
+    public function kid()
+    {
+        return $this->belongsTo(Kid::class);
+    }
+
+    /**
+     * The Comment
+     */
+    public function meals()
+    {
+        return $this->belongsToMany(Meal::class, 'followup_meal', 'followup_id', 'meal_id')->withTimestamps();
+    }
+
+    /**
+     * The Comment
+     */
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'followup_subject', 'followup_id', 'subject_id')->withTimestamps();
+    }
+
+    /**
+     * The Comment
+     */
+    public function scopeToday($query)
+    {
+        return $query->whereDate('created_at', today());
+    }
+}

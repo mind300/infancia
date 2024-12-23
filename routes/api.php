@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Branches\BranchController;
 use App\Http\Controllers\ClassRooms\ClassRoomController;
+use App\Http\Controllers\FollowUps\FollowUpController;
 use App\Http\Controllers\Kids\KidController;
 use App\Http\Controllers\Meals\MealController;
 use App\Http\Controllers\Newsletters\NewsletterController;
@@ -66,5 +67,10 @@ Route::group(['middleware' => 'api'], function () {
         // Meal Controller
         Route::apiResource('payemntbills', PaymentBillController::class);
         Route::post('payemntbills/{paymentBill}', [PaymentBillController::class, 'update'])->name('payemntbills.update');
+
+        // FollowUp Controller
+        Route::apiResource('followups', FollowUpController::class);
+        Route::post('followups/attendance', [FollowUpController::class, 'store'])->name('followups.store');
+        Route::post('followups/{followUp}', [FollowUpController::class, 'update'])->name('followups.update');
     });
 });

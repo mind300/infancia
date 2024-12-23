@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('parent_id')->constrained('parent_kids')->cascadeOnDelete();
             $table->foreignId('nursery_id')->constrained('nurseries')->cascadeOnDelete();
             $table->foreignId('branch_id')->constrained('branches');
-            $table->foreignId('classroom_id')->constrained('class_rooms');
+            $table->foreignId('class_room_id')->constrained('class_rooms');
             $table->timestamps();
         });
     }

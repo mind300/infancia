@@ -63,4 +63,20 @@ class Kid extends BaseModel
     {
         return $this->belongsToMany(PaymentBill::class, 'kids_payment_bill');
     }
+
+    /**
+     * One-to-many relationship with Attendance
+     */
+    public function attendance()
+    {
+        return $this->hasOne(Attendance::class, 'kid_id')->latest();
+    }
+
+    /**
+     * One-to-many relationship with Attendance
+     */
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'kid_id');
+    }
 }

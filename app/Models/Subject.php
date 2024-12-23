@@ -17,7 +17,6 @@ class Subject extends BaseModel
     ];
 
     // =================================== Relations ================================= //
-
     /**
      * The Comment
      */
@@ -32,5 +31,14 @@ class Subject extends BaseModel
     public function branch()
     {
         return $this->belongsTo(Branch::class);
+    }
+
+    /**
+     * The Comment
+     */
+    public function followUps()
+    {
+        return $this->belongsToMany(FollowUp::class, 'followup_subject', 'subject_id', 'followup_id')
+            ->withTimestamps();
     }
 }

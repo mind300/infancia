@@ -26,9 +26,9 @@ class NewsletterRequest extends FormRequest
             'title' => 'required|string',
             'content' => 'required|string',
             'is_private' => 'nullable|integer|in:0,1',
-            'class_room_id' => 'required_if:is_private,1|exists:newsletters,id',
+            'class_room_id' => 'required_if:is_private,1|exists:class_rooms,id',
             'branch_id' => 'required||integer|exists:branches,id',
-            // 'nursery_id' => 'required||integer|exists:nurseries,id'
+            'nursery_id' => 'required||integer|exists:nurseries,id'
         ];
     }
 }
