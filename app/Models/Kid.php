@@ -19,7 +19,7 @@ class Kid extends BaseModel
         'parent_id',
         'nursery_id',
         'branch_id',
-        'classroom_id',
+        'class_room_id',
     ];
 
     // =================================== Relations ================================= //
