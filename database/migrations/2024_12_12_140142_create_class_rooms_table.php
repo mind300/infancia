@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->integer('from')->default(0);
             $table->integer('to')->default(0);
-            $table->boolval('has_meals')->default(false);
-            $table->boolval('has_subjects')->default(false);
+            $table->boolean('has_meals')->default(false);
+            $table->boolean('has_subjects')->default(false);
             $table->foreignId('branch_id')->constrained('branches');
             $table->foreignId('nursery_id')->constrained('nurseries');
             $table->timestamps();
