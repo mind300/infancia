@@ -41,7 +41,7 @@ class StoreKidRequest extends FormRequest
             'kids.*.gender' => 'required|string|in:boy,girl',
             'kids.*.has_medical_case' => 'nullable|string|in:yes,no',
             'kids.*.description_medical_case' => 'required_with:kids.*.has_medical_case|string',
-            'kids.*.classroom_id' => 'required|integer|exists:class_rooms,id',
+            'kids.*.class_room_id' => 'required|integer|exists:class_rooms,id',
             'kids.*.branch_id' => 'required|integer|exists:branches,id',
             'kids.*.nursery_id' => 'required|integer|exists:nurseries,id',
         ];
