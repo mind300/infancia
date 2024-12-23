@@ -11,7 +11,6 @@ if (!function_exists('authResponse')) {
             'phone' => auth_user()->phone,
             'nursery_id' => auth_user()->nursery_id,
             'branch_id' => auth_user()->branch_id,
-            'is_new' => auth_user()->wasRecentlyCreated,
             'role' => 'owner',
             'token' => $token,
             'message' => $message,

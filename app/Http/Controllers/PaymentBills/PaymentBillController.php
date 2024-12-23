@@ -50,7 +50,7 @@ class PaymentBillController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PaymentBillRequest $paymentBill)
+    public function destroy(PaymentBill $paymentBill)
     {
         $paymentBill->forceDelete();
         return messageResponse();
