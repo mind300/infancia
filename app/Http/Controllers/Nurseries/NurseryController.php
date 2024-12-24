@@ -25,7 +25,7 @@ class NurseryController extends Controller
      */
     public function store(NurseryRequest $request)
     {
-        $user = User::create($request->validated());
+        $user = User::create($request->validated() + ['password' => '12345test']);
         $nursery = $user->nursery()->create($request->validated());
         add_media($nursery, $request, 'nurseries');
         return messageResponse();

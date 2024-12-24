@@ -34,10 +34,8 @@ class KidController extends Controller
             $user = User::create($request->validated() + ['password' => bcrypt('12345test')]); // Create the user
             $parent = $user->parent()->create($request->safe()->except(['name', 'email'])); // Create parent data
             $parent->kids()->createMany($request->validated('kids')); // Create kids
-            $parent->kids->each(function ($kid, $index) use ($request) {
-                if ($request->hasFile('media')) {
-                    $kid->addMediaFromRequest('media')->toMediaCollection('kids');
-                }
+            $parent->kids->each(function ($kid) use ($request) {
+                add_media($kid, $request, 'kids');
             });
             DB::commit();
             return messageResponse();
@@ -61,6 +59,7 @@ class KidController extends Controller
     public function update(UpdateKidRequest $request, Kid $kid)
     {
         $kid->update($request->validated());
+        add_media($kid, $request, 'kids');
         return messageResponse();
     }
 

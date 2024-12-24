@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use PhpParser\Builder\Class_;
+
 class Subject extends BaseModel
 {
     /**
@@ -39,5 +41,13 @@ class Subject extends BaseModel
     public function followUps()
     {
         return $this->belongsToMany(Followup::class, 'followup_subject', 'subject_id', 'followup_id')->withTimestamps();
+    }
+    
+    /**
+     * The Comment
+     */
+    public function classRooms()
+    {
+        return $this->belongsToMany(ClassRoom::class, 'class_room_subjects', 'subject_id', 'class_id')->withTimestamps();
     }
 }

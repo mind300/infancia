@@ -44,4 +44,12 @@ class ClassRoom extends BaseModel
     {
         return $this->hasMany(Kid::class);
     }
+
+    /**
+     * The Comment
+     */
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'class_room_subjects', 'subject_id', 'class_id')->withTimestamps();
+    }
 }
