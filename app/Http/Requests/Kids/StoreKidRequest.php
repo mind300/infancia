@@ -35,6 +35,7 @@ class StoreKidRequest extends FormRequest
 
             // Kid Validations
             'kids' => 'required|array',
+            'kids.*.media' => 'nullable|media',
             'kids.*.first_name' => 'required|string',
             'kids.*.last_name' => 'required|string',
             'kids.*.birth_date' => 'required|date',
