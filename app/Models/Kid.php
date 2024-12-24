@@ -79,12 +79,21 @@ class Kid extends BaseModel
     {
         return $this->hasMany(Attendance::class, 'kid_id');
     }
-    
+
     /**
      * One-to-many relationship with Attendance
      */
     public function followup()
     {
         return $this->hasOne(Followup::class, 'kid_id');
+    }
+
+    // =================================== Spatie ================================= //
+    /**
+     * Spatie media library register
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('kids')->singleFile();
     }
 }

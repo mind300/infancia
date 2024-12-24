@@ -35,7 +35,9 @@ class KidController extends Controller
             $parent = $user->parent()->create($request->safe()->except(['name', 'email'])); // Create parent data
             $parent->kids()->createMany($request->validated('kids')); // Create kids
             $parent->kids->each(function ($kid, $index) use ($request) {
-                add_media($kid, $request->validated('kids'), 'kids');
+                if ($request->hasFile('media')) {
+                    $kid->addMediaFromRequest('media')->toMediaCollection('kids');
+                }
             });
             DB::commit();
             return messageResponse();
