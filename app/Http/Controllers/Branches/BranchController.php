@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Branches;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Branches\BranchRequest;
 use App\Models\Branch;
+use App\Models\User;
 
 class BranchController extends Controller
 {
@@ -22,8 +23,9 @@ class BranchController extends Controller
      */
     public function store(BranchRequest $request)
     {
-        $branch = Branch::create($request->validated());
-        $branch->manager()->create($request->validated() + ['password' => '12345test']);
+        $user = User::create($request->validated() + ['password' => '12345test']);
+        $branch = $user->manager_branch()->create($request->validated());
+        $user->branch()->associate($branch)->save();
         return messageResponse();
     }
 

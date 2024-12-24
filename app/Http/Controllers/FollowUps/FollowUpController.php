@@ -3,25 +3,24 @@
 namespace App\Http\Controllers\FollowUps;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Followups\FollowUpAttendanceRequest;
-use App\Http\Requests\FollowUps\FollowUpRequest;
+use App\Http\Requests\Followups\AttendanceRequest;
+use App\Http\Requests\Followups\FollowupRequest;
 use App\Models\Attendance;
 use App\Models\FollowUp;
 use App\Models\Kid;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class FollowUpController extends Controller
+class FollowupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $date = Carbon::parse($request->date);
         $kids = Kid::classScope($request)->paginate(10);
-        $kids->transform(function ($kid) use ($date) {
-            $kid->attend = $kid->attendances()->where('kid_id', $kid->id)->whereDay('created_at', $date)->exists();
+        $kids->transform(function ($kid) use ($request) {
+            $kid->attend = $kid->attendances()->kidScope($request)->dateScope($request)->exists();
+            $kid->followup_id = $kid->followup_id = $kid->followup()->dateScope($request)->first()?->id;
             return $kid;
         });
         return contentResponse($kids);
@@ -30,16 +29,15 @@ class FollowUpController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(FollowUpAttendanceRequest $request)
+    public function store(AttendanceRequest $request)
     {
-        $date = Carbon::parse($request->date);
-        $attendance = Attendance::where('kid_id', $request->kid_id)->whereDate('created_at', $date)->first();
+        $attendance = Attendance::kidScope($request)->dateScope($request)->first();
         if (!$attendance) {
             $attendance = Attendance::create($request->validated());
             $attendance->kid->followup()->create($request->validated());
         } else {
             $attendance->forceDelete();
-            $attendance->kid->followup()->whereDate('created_at', $date)->delete();
+            $attendance->kid->followup()->dateScope($request)->delete();
         }
         return messageResponse();
     }
@@ -47,7 +45,7 @@ class FollowUpController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FollowUpRequest $request, FollowUp $followUp)
+    public function update(FollowupRequest $request, FollowUp $followUp)
     {
         $followUp->update($request->safe()->except(['meals', 'subjects']));
         $followUp->meals()->sync(collect($request->validated('meals'))->pluck('id'));
@@ -58,11 +56,9 @@ class FollowUpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, Kid $followup)
+    public function show(FollowUp $followup)
     {
-        $date = Carbon::parse($request->date);
-        $followUp = FollowUp::where('kid_id', $followup->id)->whereDate('created_at', $date)->first();
-        return contentResponse($followUp);
+        return contentResponse($followup->load('meals'));
     }
 
     /**

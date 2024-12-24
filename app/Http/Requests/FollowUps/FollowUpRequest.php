@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\FollowUps;
+namespace App\Http\Requests\Followups;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FollowUpRequest extends FormRequest
+class FollowupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,6 @@ class FollowUpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "id" => 'required|integer|exists:follow_ups,id',
             'napping' => 'required',
             'daiper' => 'nullable|integer',
             'potty' => 'nullable|integer',

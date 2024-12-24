@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('meals', function (Blueprint $table) {
             $table->id();
             $table->string('meal');
-            $table->string('type');
+            $table->enum('type', ['Breakfast', 'Launch', 'Snacks']);
             $table->foreignId('branch_id')->nullable()->constrained('branches');
             $table->foreignId('nursery_id')->nullable()->constrained('nurseries');
             $table->timestamps();

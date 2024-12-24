@@ -31,9 +31,9 @@ class RegisterRequest extends FormRequest
             'address' => 'required|string',
             'about' => 'nullable|string',
             'branches_number' => 'nullable|integer',
+            'generate_branch' => 'nullable|boolean',
             'services' => 'nullable|array',
             'services.*.service' => 'required|string',
-            'generate_branch' => 'nullable|integer'
         ];
     }
 }

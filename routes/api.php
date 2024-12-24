@@ -7,6 +7,7 @@ use App\Http\Controllers\FollowUps\FollowUpController;
 use App\Http\Controllers\Kids\KidController;
 use App\Http\Controllers\Meals\MealController;
 use App\Http\Controllers\Newsletters\NewsletterController;
+use App\Http\Controllers\Nurseries\NurseryController;
 use App\Http\Controllers\Parents\ParentController;
 use App\Http\Controllers\PaymentBills\PaymentBillController;
 use App\Http\Controllers\Subjects\SubjectController;
@@ -68,9 +69,13 @@ Route::group(['middleware' => 'api'], function () {
         Route::apiResource('payemntbills', PaymentBillController::class);
         Route::post('payemntbills/{paymentBill}', [PaymentBillController::class, 'update'])->name('payemntbills.update');
 
-        // FollowUp Controller
+        // Folloup Controller
         Route::apiResource('followups', FollowUpController::class);
         Route::post('followups/attendance', [FollowUpController::class, 'store'])->name('followups.store');
         Route::post('followups/{followUp}', [FollowUpController::class, 'update'])->name('followups.update');
+
+        // Nursery Controller
+        Route::apiResource('nurseries', NurseryController::class);
+        Route::post('nurseries/{nursery}', [NurseryController::class, 'update'])->name('nurseries.update');
     });
 });

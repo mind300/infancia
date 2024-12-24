@@ -11,7 +11,7 @@ class NurseryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -31,6 +31,7 @@ class NurseryRequest extends FormRequest
             'address' => 'required|string',
             'about' => 'nullable|string',
             'branches_number' => 'nullable|integer',
+            'generate_branch' => 'nullable|boolean',
             'services' => 'nullable|array',
             'services.*.service' => 'required|string',
         ];

@@ -50,9 +50,12 @@ class Nursery extends BaseModel
     }
 
     // =================================== Scopes ================================= //
-    public function scopeStatus(Builder $query, $status): void
+    /**
+     * The Comment
+     */
+    public function scopeStatus(Builder $query, $request): void
     {
-        $query->whereAny('status', $status);
+        $query->whereIn('status', $request->status)->get();
     }
 
     // =================================== Spatie ================================= //

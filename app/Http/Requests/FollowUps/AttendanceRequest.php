@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Meals;
+namespace App\Http\Requests\Followups;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MealRequest extends FormRequest
+class AttendanceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,10 @@ class MealRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'meal' => 'required|string',
-            'type' => 'required|string|in:Breakfast,Launch,Snacks',
-            'branch_id' => 'required||integer|exists:branches,id',
-            'nursery_id' => 'required||integer|exists:nurseries,id'
+            //
+            'kid_id' => 'required|integer|exists:kids,id',
+            'class_room_id' => 'required|integer|exists:class_rooms,id',
+            'branch_id' => 'required|integer|exists:branches,id'
         ];
     }
 }

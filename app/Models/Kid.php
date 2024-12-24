@@ -79,13 +79,12 @@ class Kid extends BaseModel
     {
         return $this->hasMany(Attendance::class, 'kid_id');
     }
-
     
     /**
      * One-to-many relationship with Attendance
      */
     public function followup()
     {
-        return $this->hasOne(FollowUp::class, 'kid_id');
+        return $this->hasOne(Followup::class, 'kid_id');
     }
 }

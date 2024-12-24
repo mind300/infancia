@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Nurseries;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Nurseries\NurseryRequest;
+use App\Http\Requests\Nurseries\NurseryStatusRequest;
 use App\Models\Nursery;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class NurseryController extends Controller
@@ -11,17 +14,20 @@ class NurseryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(NurseryStatusRequest $request)
     {
-        $nurseries = Nursery::status('pending')->paginate(10);
+        $nurseries = Nursery::status($request)->paginate(10);
+        return contentResponse($nurseries);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NurseryRequest $request)
     {
-        $nursery = Nursery::create($request->validated());
+        $user = User::create($request->validated());
+        $nursery = $user->nursery()->create($request->validated());
+        add_media($nursery, $request, 'nurseries');
         return messageResponse();
     }
 
@@ -40,6 +46,7 @@ class NurseryController extends Controller
     {
         $nursery->update($request->validated());
         $nursery->user()->update($request->validated());
+        add_media($nursery, $request, 'nurseries');
         return messageResponse();
     }
 

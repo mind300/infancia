@@ -86,7 +86,15 @@ class User extends Authenticatable implements JWTSubject
      */
     public function branch()
     {
-        return $this->hasOne(Branch::class);
+        return $this->belongsTo(Branch::class, 'branch_id');
+    }
+
+    /**
+     * The Comment
+     */
+    public function manager_branch()
+    {
+        return $this->hasOne(Branch::class, 'manager_id');
     }
 
     /**

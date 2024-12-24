@@ -41,6 +41,14 @@ class Branch extends BaseModel
     /**
      * The Comment
      */
+    public function user()
+    {
+        return $this->hasOne(User::class, 'branch_id');
+    }
+
+    /**
+     * The Comment
+     */
     public function classes()
     {
         return $this->hasMany(Nursery::class);

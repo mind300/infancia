@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Kids;
 
 use App\Http\Controllers\Controller;
-
+// Models
 use App\Models\Kid;
 use App\Models\User;
-
+// DB
 use Illuminate\Support\Facades\DB;
-
+// Requests
 use Illuminate\Http\Request;
 use App\Http\Requests\Kids\StoreKidRequest;
 use App\Http\Requests\Kids\UpdateKidRequest;
@@ -31,20 +31,17 @@ class KidController extends Controller
     {
         DB::beginTransaction();
         try {
-            // Create the user
-            $user = User::create($request->validated() + ['password' => bcrypt('12345test')]);
-
-            // Create parent data
-            $parent = $user->parent()->create($request->safe()->except(['name', 'email']));
-
-            // Create kids
-            $parent->kids()->createMany($request->validated('kids'));
-
+            $user = User::create($request->validated() + ['password' => bcrypt('12345test')]); // Create the user
+            $parent = $user->parent()->create($request->safe()->except(['name', 'email'])); // Create parent data
+            $parent->kids()->createMany($request->validated('kids')); // Create kids
+            $parent->kids->each(function ($kid, $index) use ($request) {
+                add_media($kid, $request->validated('kids'), 'kids');
+            });
             DB::commit();
             return messageResponse();
-        } catch (\Exception $e) {
+        } catch (\Exception $error) {
             DB::rollBack();
-            return messageResponse($e->getMessage(), false, 500);
+            return messageResponse($error->getMessage(), false, 500);
         }
     }
 
@@ -53,7 +50,7 @@ class KidController extends Controller
      */
     public function show(Kid $kid)
     {
-        return contentResponse($kid);
+        return contentResponse($kid->load('parent'));
     }
 
     /**

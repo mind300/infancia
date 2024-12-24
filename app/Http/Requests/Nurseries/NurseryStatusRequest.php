@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Followups;
+namespace App\Http\Requests\Nurseries;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FollowUpAttendanceRequest extends FormRequest
+class NurseryStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,8 @@ class FollowUpAttendanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            'kid_id' => 'required|integer|exists:kids,id',
-            'class_room_id' => 'required|integer|exists:class_rooms,id',
-            'branch_id' => 'required|integer|exists:branches,id'
+            'status' => 'required|array',
+            'status.*.state' => 'required|string|in:pending,approved,recjected',
         ];
     }
 }

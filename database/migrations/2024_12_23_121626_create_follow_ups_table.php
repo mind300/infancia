@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('follow_ups', function (Blueprint $table) {
+        Schema::create('followups', function (Blueprint $table) {
             $table->id();
             $table->time('napping')->default(0);
             $table->integer('daiper')->default(0);
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('follow_ups');
+        Schema::dropIfExists('followups');
     }
 };

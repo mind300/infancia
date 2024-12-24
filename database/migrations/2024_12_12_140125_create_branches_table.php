@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('address');
             $table->foreignIdFor(Country::class);
             $table->foreignIdFor(City::class);
-            $table->foreignId('manager_id')->nullable()->constrained('users');
-            $table->foreignId('nursery_id')->constrained('nurseries');
+            $table->foreignId('manager_id')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('nursery_id')->constrained('nurseries')->cascadeOnDelete();
             $table->boolean('main')->default(false);
             $table->timestamps();
         });

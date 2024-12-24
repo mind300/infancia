@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-
 class Meal extends BaseModel
 {
     /**
@@ -25,7 +23,6 @@ class Meal extends BaseModel
      */
     public function followUps()
     {
-        return $this->belongsToMany(FollowUp::class, 'followup_subject', 'subject_id', 'followup_id')
-            ->withTimestamps();
+        return $this->belongsToMany(Followup::class, 'followup_subject', 'subject_id', 'followup_id')->withTimestamps();
     }
 }

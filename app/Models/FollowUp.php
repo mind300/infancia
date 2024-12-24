@@ -3,7 +3,7 @@
 namespace App\Models;
 
 
-class FollowUp extends BaseModel
+class Followup extends BaseModel
 {
     /**
      * The attributes that are mass assignable.
@@ -45,13 +45,5 @@ class FollowUp extends BaseModel
     public function subjects()
     {
         return $this->belongsToMany(Subject::class, 'followup_subject', 'followup_id', 'subject_id')->withTimestamps();
-    }
-
-    /**
-     * The Comment
-     */
-    public function scopeToday($query)
-    {
-        return $query->whereDate('created_at', today());
     }
 }
