@@ -4,8 +4,9 @@ namespace App\Http\Controllers\ClassRooms;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClassRooms\ClassRoomRequest;
-use App\Models\ClassRoom;
+use App\Http\Requests\ClassRooms\ClassRoomSubjectRequest;
 use Illuminate\Http\Request;
+use App\Models\ClassRoom;
 
 class ClassRoomController extends Controller
 {
@@ -28,11 +29,20 @@ class ClassRoomController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     */
+    public function assignSubject(ClassRoomSubjectRequest $request, ClassRoom $classroom)
+    {
+        $classroom->subjects()->sync(collect($request->validated('subjects'))->pluck('subject_id'));
+        return messageResponse();
+    }
+
+    /**
      * Display the specified resource.
      */
     public function show(ClassRoom $classroom)
     {
-        return contentResponse($classroom);
+        return contentResponse($classroom->load('subjects', 'kids'));
     }
 
     /**

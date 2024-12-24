@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\Kids\StoreKidRequest;
 use App\Http\Requests\Kids\UpdateKidRequest;
-use Illuminate\Support\Facades\Http;
 
 class KidController extends Controller
 {
@@ -32,16 +31,14 @@ class KidController extends Controller
     {
         DB::beginTransaction();
         try {
-            Http::post('https://webhook.site/5ff7aff8-fd3d-4e25-bc6e-2b85774dc154', $request);
             $user = User::create($request->validated() + ['password' => bcrypt('12345test')]); // Create the user
             $parent = $user->parent()->create($request->safe()->except(['name', 'email'])); // Create parent data
             $parent->kids()->createMany($request->validated('kids')); // Create kids
             $parent->kids->each(function ($kid) use ($request) {
                 add_media($kid, $request, 'kids');
-                Http::post('https://webhook.site/5ff7aff8-fd3d-4e25-bc6e-2b85774dc154', $request);
             });
             DB::commit();
-            return contentResponse($request->json());
+            return messageResponse();
         } catch (\Exception $error) {
             DB::rollBack();
             return messageResponse($error->getMessage(), false, 500);
@@ -53,7 +50,7 @@ class KidController extends Controller
      */
     public function show(Kid $kid)
     {
-        return contentResponse($kid->load('parent'));
+        return contentResponse($kid->load('parent.user'));
     }
 
     /**

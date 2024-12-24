@@ -43,4 +43,12 @@ class ParentKid extends BaseModel
     {
         return $this->hasMany(Kid::class, 'parent_id');
     }
+
+    /**
+     * The Comment
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

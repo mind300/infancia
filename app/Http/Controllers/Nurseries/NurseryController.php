@@ -7,7 +7,6 @@ use App\Http\Requests\Nurseries\NurseryRequest;
 use App\Http\Requests\Nurseries\NurseryStatusRequest;
 use App\Models\Nursery;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class NurseryController extends Controller
 {

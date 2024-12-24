@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Followups;
+namespace App\Http\Requests\ClassRooms;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AttendanceRequest extends FormRequest
+class ClassRoomSubjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,8 @@ class AttendanceRequest extends FormRequest
     {
         return [
             //
-            'kid_id' => 'required|integer|exists:kids,id',
-            'class_room_id' => 'required|integer|exists:class_rooms,id',
-            'branch_id' => 'required|integer|exists:branches,id',
-            'nursery_id' => 'required|integer|exists:nurseries,id'
+            'subjects' => 'required|array',
+            'subjects.*.subject_id' => 'required|integer|exists:subjects,id',
         ];
     }
 }

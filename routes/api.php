@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Branches\BranchController;
 use App\Http\Controllers\ClassRooms\ClassRoomController;
-use App\Http\Controllers\FollowUps\FollowUpController;
+use App\Http\Controllers\FollowUps\FollowupController;
 use App\Http\Controllers\Kids\KidController;
 use App\Http\Controllers\Meals\MealController;
 use App\Http\Controllers\Newsletters\NewsletterController;
@@ -46,6 +46,7 @@ Route::group(['middleware' => 'api'], function () {
 
         // ClassRoom Controller
         Route::apiResource('classrooms', ClassRoomController::class);
+        Route::post('classrooms/assign/subject/{classroom}', [ClassRoomController::class, 'assignSubject'])->name('classrooms.assignSubject');
 
         // Parent Controller
         Route::apiResource('parents', ParentController::class);
@@ -70,9 +71,9 @@ Route::group(['middleware' => 'api'], function () {
         Route::post('payemntbills/{paymentBill}', [PaymentBillController::class, 'update'])->name('payemntbills.update');
 
         // Folloup Controller
-        Route::apiResource('followups', FollowUpController::class);
-        Route::post('followups/attendance', [FollowUpController::class, 'store'])->name('followups.store');
-        Route::post('followups/{followUp}', [FollowUpController::class, 'update'])->name('followups.update');
+        Route::apiResource('followups', FollowupController::class);
+        Route::post('followups/attendance', [FollowupController::class, 'store'])->name('followups.store');
+        Route::post('followups/{followUp}', [FollowupController::class, 'update'])->name('followups.update');
 
         // Nursery Controller
         Route::apiResource('nurseries', NurseryController::class);

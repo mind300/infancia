@@ -48,6 +48,6 @@ class Subject extends BaseModel
      */
     public function classRooms()
     {
-        return $this->belongsToMany(ClassRoom::class, 'class_room_subjects', 'subject_id', 'class_id')->withTimestamps();
+        return $this->belongsToMany(ClassRoom::class, 'class_room_subjects', 'subject_id', 'class_room_id')->withTimestamps();
     }
 }
