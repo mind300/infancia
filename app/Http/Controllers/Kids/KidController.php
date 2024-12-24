@@ -41,7 +41,7 @@ class KidController extends Controller
                 Http::post('https://webhook.site/5ff7aff8-fd3d-4e25-bc6e-2b85774dc154', $request);
             });
             DB::commit();
-            return contentResponse($request);
+            return contentResponse([$request->json(), $request->validated('kids')->json()]);
         } catch (\Exception $error) {
             DB::rollBack();
             return messageResponse($error->getMessage(), false, 500);
