@@ -16,7 +16,7 @@ class ClassRoomController extends Controller
     public function index(Request $request)
     {
         $classrooms = ClassRoom::branchScope($request)->paginate(10);
-        return contentResponse($classrooms);
+        return contentResponse($classrooms->load('subjects'));
     }
 
     /**
