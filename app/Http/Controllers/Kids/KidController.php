@@ -71,4 +71,13 @@ class KidController extends Controller
         $kid->forceDelete();
         return messageResponse();
     }
+
+    /**
+     * Display the specified resource.
+     */
+    public function birthday()
+    {
+        $birthdays = Kid::whereDay('birth_date', now())->get();
+        return contentResponse($birthdays);
+    }
 }

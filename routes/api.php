@@ -54,6 +54,7 @@ Route::group(['middleware' => 'api'], function () {
 
         // Kid Controller
         Route::apiResource('kids', KidController::class);
+        Route::get('kids/birthday/comming', [KidController::class, 'birthday']);
         Route::post('kids/{kid}', [KidController::class, 'update'])->name('kids.update');
 
         // Newsletter Controller

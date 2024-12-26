@@ -15,7 +15,7 @@ class NewsletterController extends Controller
     public function index(Request $request)
     {
         $newsletters = Newsletter::branchScope($request)->classPublicScope($request)->get();
-        return contentResponse($newsletters);
+        return contentResponse($newsletters->load(['class_room:id,name', 'nursery.media']));
     }
 
     /**
@@ -24,6 +24,7 @@ class NewsletterController extends Controller
     public function store(NewsletterRequest $request)
     {
         $newsletter = Newsletter::create($request->validated());
+        add_media($newsletter, $request, 'newsletters');
         return messageResponse();
     }
 
@@ -42,6 +43,7 @@ class NewsletterController extends Controller
     public function update(NewsletterRequest $request, Newsletter $newsletter)
     {
         $newsletter->update($request->valiadated());
+        add_media($newsletter, $request, 'newsletters');
         return messageResponse();
     }
 
