@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Branches\BranchController;
 use App\Http\Controllers\ClassRooms\ClassRoomController;
-use App\Http\Controllers\FollowUps\FollowupController;
+use App\Http\Controllers\Followups\FollowupController;
 use App\Http\Controllers\Kids\KidController;
 use App\Http\Controllers\Meals\MealController;
 use App\Http\Controllers\Newsletters\NewsletterController;
