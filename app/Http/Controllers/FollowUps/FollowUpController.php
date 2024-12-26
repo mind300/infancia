@@ -45,7 +45,7 @@ class FollowupController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FollowupRequest $request, FollowUp $followUp)
+    public function update(FollowupRequest $request, Followup $followUp)
     {
         $followUp->update($request->safe()->except(['meals', 'subjects']));
         $followUp->meals()->sync(collect($request->validated('meals'))->pluck('id'));
@@ -56,7 +56,7 @@ class FollowupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FollowUp $followup)
+    public function show(Followup $followup)
     {
         return contentResponse($followup->load('meals'));
     }
@@ -64,7 +64,7 @@ class FollowupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FollowUp $followUp)
+    public function destroy(Followup $followUp)
     {
         $followUp->forceDelete();
         return messageResponse();
