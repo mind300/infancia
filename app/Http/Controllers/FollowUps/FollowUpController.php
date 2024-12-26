@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\FollowUps;
+namespace App\Http\Controllers\Followups;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Followups\AttendanceRequest;
