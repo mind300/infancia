@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Followups\AttendanceRequest;
 use App\Http\Requests\Followups\FollowupRequest;
 use App\Models\Attendance;
-use App\Models\FollowUp;
+use App\Models\Followup;
 use App\Models\Kid;
 use Illuminate\Http\Request;
 
