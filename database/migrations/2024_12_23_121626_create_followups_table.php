@@ -17,8 +17,9 @@ return new class extends Migration
             $table->integer('daiper')->default(0);
             $table->integer('potty')->default(0);
             $table->integer('toilet')->default(0);
-            $table->enum('moods', ['normal', 'happy', 'angry', 'sad', 'sleepy'])->default('normal');
+            $table->enum('moods', [0, 1, 2, 3, 4])->default(0);
             $table->longText('comment')->nullable();
+            $table->date('date');
             $table->foreignId('kid_id')->constrained('kids');
             $table->foreignId('branch_id')->constrained('branches');
             $table->foreignId('nursery_id')->constrained('nurseries')->cascadeOnDelete();

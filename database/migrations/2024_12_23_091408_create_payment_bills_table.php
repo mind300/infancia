@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('payment_bills', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->longText('descirption')->nullable();
+            $table->longText('description')->nullable();
+            $table->double('amount')->default(0);
             $table->foreignId('nursery_id')->constrained('nurseries');
             $table->foreignId('branch_id')->constrained('branches');
             $table->enum('status', ['mandatory', 'optional']);

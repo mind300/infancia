@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+
 class Attendance extends BaseModel
 {
     protected $fillable = [
+        'date',
         'kid_id',
-        'class_room_id',  // Assuming this is the class the kid attended
+        'class_room_id',
+        'branch_id'
     ];
 
     // =================================== Relations ================================= //
@@ -25,4 +30,7 @@ class Attendance extends BaseModel
     {
         return $this->belongsTo(ClassRoom::class, 'class_room_id');
     }
+
+    
+  
 }

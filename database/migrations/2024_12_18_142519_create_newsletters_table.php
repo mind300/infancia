@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title');
             $table->longText('content');
             $table->boolean('is_private')->default(false);
-            $table->integer('likes_count')->default(0);
             $table->foreignId('class_room_id')->nullable()->constrained('class_rooms');
             $table->foreignId('branch_id')->constrained('branches');
             $table->foreignId('nursery_id')->constrained('nurseries');

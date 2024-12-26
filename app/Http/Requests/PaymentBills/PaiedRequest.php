@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Followups;
+namespace App\Http\Requests\PaymentBills;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AttendanceRequest extends FormRequest
+class PaiedRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,8 @@ class AttendanceRequest extends FormRequest
     {
         return [
             //
-            'date' => 'required|date',
-            'kid_id' => 'required|integer|exists:kids,id',
-            'class_room_id' => 'required|integer|exists:class_rooms,id',
-            'branch_id' => 'required|integer|exists:branches,id',
-            'nursery_id' => 'required|integer|exists:nurseries,id'
+            'media' => 'nullable|image',
+            'payment_bill_id' => 'required|integer|exists:payment_bills,id',
         ];
     }
 }

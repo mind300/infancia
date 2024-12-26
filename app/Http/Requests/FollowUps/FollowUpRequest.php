@@ -26,7 +26,7 @@ class FollowupRequest extends FormRequest
             'daiper' => 'nullable|integer',
             'potty' => 'nullable|integer',
             'toilet' => 'nullable|integer',
-            'moods' => 'nullable|string|in:normal,happy,angry,sad,sleepy',
+            'moods' => 'nullable|integer|in:0,1,2,3,4',
             'comment' => 'nullable|string',
             'meals' => 'nullable|array',
             'meals.*.id' => 'required|integer|exists:meals,id',

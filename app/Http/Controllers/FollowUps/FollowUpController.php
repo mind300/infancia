@@ -19,8 +19,8 @@ class FollowupController extends Controller
     {
         $kids = Kid::classScope($request)->paginate(10);
         $kids->transform(function ($kid) use ($request) {
-            $kid->attend = $kid->attendances()->kidScope($request)->dateScope($request)->exists();
-            $kid->followup_id = $kid->followup_id = $kid->followup()->dateScope($request)->first()?->id;
+            $kid->attend = $kid->attendances()->where('kid_id', $kid->id)->attendanceDateScope($request)->exists();
+            $kid->followup_id = $kid->followup_id = $kid->followup()->attendanceDateScope($request)->first()?->id;
             return $kid;
         });
         return contentResponse($kids);

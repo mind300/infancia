@@ -17,6 +17,7 @@ class Followup extends BaseModel
         'toilet',
         'moods',
         'comment',
+        'date',
         'kid_id',
         'branch_id',
         'nursery_id',
@@ -36,7 +37,7 @@ class Followup extends BaseModel
      */
     public function meals()
     {
-        return $this->belongsToMany(Meal::class, 'followup_meal', 'followup_id', 'meal_id')->withTimestamps();
+        return $this->belongsToMany(Meal::class, 'followup_meal', 'followup_id', 'meal_id');
     }
 
     /**
@@ -44,6 +45,6 @@ class Followup extends BaseModel
      */
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class, 'followup_subject', 'followup_id', 'subject_id')->withTimestamps();
+        return $this->belongsToMany(Subject::class, 'followup_subject', 'followup_id', 'subject_id');
     }
 }

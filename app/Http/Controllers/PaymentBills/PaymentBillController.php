@@ -4,7 +4,6 @@ namespace App\Http\Controllers\PaymentBills;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentBills\PaymentBillRequest;
-use App\Models\Kid;
 use App\Models\PaymentBill;
 use Illuminate\Http\Request;
 
@@ -32,9 +31,9 @@ class PaymentBillController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PaymentBill $paymentBill)
+    public function show(PaymentBill $payemntbill)
     {
-        return contentResponse($paymentBill);
+        return contentResponse($payemntbill->load('kids'));
     }
 
     /**

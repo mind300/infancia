@@ -59,9 +59,9 @@ class Kid extends BaseModel
     /**
      * The Comment
      */
-    public function paymentBills()
+    public function payment_bills()
     {
-        return $this->belongsToMany(PaymentBill::class, 'kids_payment_bill');
+        return $this->belongsToMany(PaymentBill::class, 'kids_payment_bill')->withPivot('status');
     }
 
     /**
@@ -69,7 +69,7 @@ class Kid extends BaseModel
      */
     public function attendance()
     {
-        return $this->hasOne(Attendance::class, 'kid_id')->latest();
+        return $this->hasOne(Attendance::class, 'kid_id');
     }
 
     /**

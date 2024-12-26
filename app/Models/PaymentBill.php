@@ -32,6 +32,6 @@ class PaymentBill extends BaseModel
      */
     public function kids()
     {
-        return $this->belongsToMany(Kid::class, 'kids_payment_bill');
+        return $this->belongsToMany(Kid::class, 'kids_payment_bill')->withPivot('status');
     }
 }
