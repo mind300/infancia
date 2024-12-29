@@ -40,9 +40,9 @@ class ClassRoomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ClassRoom $classroom)
+    public function show(Request $request, ClassRoom $classroom)
     {
-        return contentResponse($classroom->load('subjects', 'kids'));
+        return contentResponse($request->no_kids == 'true' ?  $classroom->load('subjects') : $classroom->load('subjects', 'kids'));
     }
 
     /**
