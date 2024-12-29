@@ -25,7 +25,11 @@ class PaymentBillsHistoryController extends Controller
     public function store(PaiedRequest $request)
     {
         $paymentBill = PaymentBill::find($request->validated('payment_bill_id'));
-        $paymentBill->kids()->update(['status' => 'review']);
+        $status = $request->validated('status');
+        if ($request->hasFile('media')) {
+            $status = 'review';
+        }
+        $paymentBill->kids()->update(['status' => $status]);
         add_media($paymentBill, $request, 'payment bills');
         return messageResponse();
     }

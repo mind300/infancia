@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('payment_bill_id')->constrained('payment_bills')->cascadeOnDelete();
             $table->foreignId('kid_id')->constrained('kids')->cascadeOnDelete();
-            $table->enum('status', ['pending', 'review', 'accepted', 'rejcted'])->default('pending');
+            $table->enum('status', ['pending', 'review', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

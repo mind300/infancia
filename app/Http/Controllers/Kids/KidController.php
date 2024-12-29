@@ -75,9 +75,40 @@ class KidController extends Controller
     /**
      * Display the specified resource.
      */
-    public function birthday()
-    {
-        $birthdays = Kid::whereMonth('birth_date', now())->get();
-        return contentResponse($birthdays);
-    }
+    // public function birthday()
+    // {
+    //     $date = now();
+    //     dump($date);
+    //     $birthdays = Kid::whereMonth('birth_date', now()->mon)->get();
+    //     return contentResponse($birthdays);
+    // }
+
+
+    // public function birthdayKids($accessMonth)
+    // {
+    //     $month = ($accessMonth === 'thisMonth') ? Carbon::now()->month : Carbon::now()->addMonth()->month;
+
+    //     $today = Carbon::today()->startOfDay();
+    //     $kidsBirth = Kids::whereMonth('birthdate', $month)->where('nursery_id', nursery_id())->get();
+
+    //     $kids = $kidsBirth->map(function ($kid) use ($today) {
+    //         $birthdateKid = Carbon::parse($kid->birthdate);
+    //         $birthDayThisYear = $birthdateKid->copy()->year($today->year);
+
+    //         if ($birthDayThisYear < $today) {
+    //             $birthDayThisYear->addYear();
+    //         }
+
+    //         return [
+    //             'id' => $kid->id,
+    //             'kid_name' => $kid->kid_name,
+    //             'class' => $kid->class->name,
+    //             'birthdate' => $kid->birthdate,
+    //             'age' => $birthdateKid->diffInYears($today),
+    //             'countdown' => $birthDayThisYear->diffInDays($today),
+    //         ];
+    //     });
+
+    //     return contentResponse($kids, fetchAll('Kids Birthday Upcoming'));
+    // }
 }

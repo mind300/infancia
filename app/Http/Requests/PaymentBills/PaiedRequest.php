@@ -25,6 +25,7 @@ class PaiedRequest extends FormRequest
             //
             'media' => 'nullable|image',
             'payment_bill_id' => 'required|integer|exists:payment_bills,id',
+            'status' => 'required|string|in:rejected',
         ];
     }
 }
