@@ -75,13 +75,11 @@ class KidController extends Controller
     /**
      * Display the specified resource.
      */
-    // public function birthday()
-    // {
-    //     $date = now();
-    //     dump($date);
-    //     $birthdays = Kid::whereMonth('birth_date', now()->mon)->get();
-    //     return contentResponse($birthdays);
-    // }
+    public function birthday()
+    {
+        $birthdays = Kid::orWhereMonth([['birth_date', now()->month], ['birth_date', now()]])->get();
+        return contentResponse($birthdays);
+    }
 
 
     // public function birthdayKids($accessMonth)

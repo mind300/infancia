@@ -17,7 +17,7 @@ class ParentController extends Controller
     public function index(Request $request)
     {
         $parents = ParentKid::branchScope($request)->withCount('kids')->paginate(10);
-        return contentResponse($parents);
+        return contentResponse($parents->load('user'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ParentController extends Controller
      */
     public function show(ParentKid $parent)
     {
-        return contentResponse($parent->load('kids'));
+        return contentResponse($parent->load('user', 'kids'));
     }
 
     /**
