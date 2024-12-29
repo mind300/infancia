@@ -48,6 +48,13 @@ class Nursery extends BaseModel
     {
         return $this->hasMany(Service::class);
     }
+    /**
+     * The Comment
+     */
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
 
     // =================================== Scopes ================================= //
     /**

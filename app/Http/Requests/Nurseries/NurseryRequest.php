@@ -33,7 +33,13 @@ class NurseryRequest extends FormRequest
             'branches_number' => 'nullable|integer',
             'generate_branch' => 'nullable|boolean',
             'services' => 'nullable|array',
-            'services.*.service' => 'required|string',
+            'services.*.id' => 'nullable|integer',
+            'services.*.content' => 'required|string',
+            'contacts' => 'nullable|array',
+            'contacts.*.id' => 'nullable|integer',
+            'contacts.*.link' => 'required|string',
+            'contacts.*.type' => 'required|string|in:email, phone, social',
+            'contacts.*.icon' => 'required|string',
         ];
     }
 }

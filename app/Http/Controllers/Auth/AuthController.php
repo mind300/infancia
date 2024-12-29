@@ -41,7 +41,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return contentResponse(auth_user());
+        return contentResponse(auth_user()->load('media'));
     }
 
     /**

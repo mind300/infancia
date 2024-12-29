@@ -12,7 +12,6 @@ class Service extends BaseModel
      * @var list<string>
      */
     protected $fillable = [
-        'title',
         'content',
         'nursery_id',
     ];

@@ -35,7 +35,7 @@ class NurseryController extends Controller
      */
     public function show(Nursery $nurseries)
     {
-        return contentResponse($nurseries);
+        return contentResponse($nurseries->load('media', 'services', 'contacts'));
     }
 
     /**
@@ -44,7 +44,9 @@ class NurseryController extends Controller
     public function update(NurseryRequest $request, Nursery $nurseries)
     {
         $nurseries->update($request->validated());
-        $nurseries->user()->update($request->validated());
+        $nurseries->user()->update($request->safe()->only(['email', 'phone']));
+        $nurseries->services()->upsert($request->validated('services'), ['id'], ['content']);
+        $nurseries->contacts()->upsert($request->validated('contacts'), ['id'], ['link', 'type', 'icon']);
         add_media($nurseries, $request, 'nurseries');
         return messageResponse();
     }
