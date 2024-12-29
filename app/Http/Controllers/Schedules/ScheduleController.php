@@ -15,7 +15,7 @@ class ScheduleController extends Controller
     public function index(Request $request)
     {
         $schedules = ClassRoom::with(['schedules' => function ($query) use ($request) {
-            $query->where([['class_room_id', $request->class_room_id], ['date' => $request->date]]);
+            $query->where([['class_room_id', $request->class_room_id], ['date', $request->date]]);
         }])->find($request->class_room_id);
         return contentResponse($schedules);
     }

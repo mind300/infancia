@@ -58,6 +58,6 @@ class ClassRoom extends BaseModel
      */
     public function schedules()
     {
-        return $this->belongsToMany(Subject::class, 'schedules', 'class_room_id', 'subject_id')->withPivot('date');
+        return $this->belongsToMany(Subject::class, 'schedules', 'class_room_id', 'subject_id')->withPivot('date', 'content');
     }
 }
