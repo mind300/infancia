@@ -77,7 +77,7 @@ class KidController extends Controller
      */
     public function birthday()
     {
-        $birthdays = Kid::orWhereMonth([['birth_date', now()->month], ['birth_date', now()]])->get();
+        $birthdays = Kid::orwhereMonth('birth_date', now()->month)->get();
         return contentResponse($birthdays);
     }
 
