@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\Kids\StoreKidRequest;
 use App\Http\Requests\Kids\UpdateKidRequest;
+use Carbon\Carbon;
 
 class KidController extends Controller
 {
@@ -77,10 +78,20 @@ class KidController extends Controller
      */
     public function birthday()
     {
-        $birthdays = Kid::orwhereMonth('birth_date', now()->month)->get();
+        $today = Carbon::today()->startOfDay();
+        $birthdays = Kid::whereMonth('birth_date', now()->month)->orWhereMonth('birth_date', now()->addMonth()->month)  // Next month
+            ->get();
+        $birthdays->transform(function ($kid) use ($today) {
+            $birthdateKid = Carbon::parse($kid->birth_date);
+            $birthDayThisYear = $birthdateKid->copy()->year($today->year);
+            if ($birthDayThisYear < $today) {
+                $birthDayThisYear->addYear();
+            }
+            $kid->countdown = $birthDayThisYear->diffInDays($today);
+            return $kid;
+        });
         return contentResponse($birthdays);
     }
-
 
     // public function birthdayKids($accessMonth)
     // {
