@@ -78,46 +78,21 @@ class KidController extends Controller
      */
     public function birthday()
     {
-        $today = Carbon::today()->startOfDay();
-        $birthdays = Kid::whereMonth('birth_date', now()->month)->orWhereMonth('birth_date', now()->addMonth()->month)  // Next month
+        $kids = Kid::whereMonth('birth_date', now()->month())
+            ->orWhereMonth('birth_date', now()->addMonth()->month)
             ->get();
-        $birthdays->transform(function ($kid) use ($today) {
-            $birthdateKid = Carbon::parse($kid->birth_date);
-            $birthDayThisYear = $birthdateKid->copy()->year($today->year);
-            if ($birthDayThisYear < $today) {
-                $birthDayThisYear->addYear();
+
+        $kids->transform(function ($kid) {
+            $birthdayThisYear = Carbon::parse($kid->birth_date)->setYear(now()->year);
+            if ($birthdayThisYear->isPast()) {
+                $birthdayThisYear->addYear();
             }
-            $kid->countdown = $birthDayThisYear->diffInDays($today);
-            return $kid;
+            if (!$birthdayThisYear->isBefore(today())) {
+                $kid->countdown = $birthdayThisYear->diffInDays(today(), true);
+                return $kid;
+            }
         });
-        return contentResponse($birthdays);
+
+        return messageResponse($kids);
     }
-
-    // public function birthdayKids($accessMonth)
-    // {
-    //     $month = ($accessMonth === 'thisMonth') ? Carbon::now()->month : Carbon::now()->addMonth()->month;
-
-    //     $today = Carbon::today()->startOfDay();
-    //     $kidsBirth = Kids::whereMonth('birthdate', $month)->where('nursery_id', nursery_id())->get();
-
-    //     $kids = $kidsBirth->map(function ($kid) use ($today) {
-    //         $birthdateKid = Carbon::parse($kid->birthdate);
-    //         $birthDayThisYear = $birthdateKid->copy()->year($today->year);
-
-    //         if ($birthDayThisYear < $today) {
-    //             $birthDayThisYear->addYear();
-    //         }
-
-    //         return [
-    //             'id' => $kid->id,
-    //             'kid_name' => $kid->kid_name,
-    //             'class' => $kid->class->name,
-    //             'birthdate' => $kid->birthdate,
-    //             'age' => $birthdateKid->diffInYears($today),
-    //             'countdown' => $birthDayThisYear->diffInDays($today),
-    //         ];
-    //     });
-
-    //     return contentResponse($kids, fetchAll('Kids Birthday Upcoming'));
-    // }
 }
