@@ -38,11 +38,19 @@ class ClassRoomController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     */
+    public function classSubjects(ClassRoom $classroom)
+    {
+        return contentResponse($classroom->subjects);
+    }
+
+    /**
      * Display the specified resource.
      */
-    public function show(Request $request, ClassRoom $classroom)
+    public function show(ClassRoom $classroom)
     {
-        return contentResponse($request->no_kids == 'true' ?  $classroom->load('subjects') : $classroom->load('subjects', 'kids'));
+        return contentResponse($classroom->load('subjects', 'kids'));
     }
 
     /**
