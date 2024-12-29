@@ -19,7 +19,7 @@ class ScheduleController extends Controller
             $query->where([['class_room_id', $request->class_room_id], ['date', $request->date]]);
         }])->find($request->class_room_id);
 
-        $subjects = $classRoom->subjects->flatMap(function ($subject) {
+        $subjects = $classRoom->subjects->map(function ($subject) {
             return [
                 'id' => $subject->id,
                 'title' => $subject->title,
