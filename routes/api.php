@@ -83,7 +83,7 @@ Route::group(['middleware' => 'api'], function () {
 
         // Nursery Controller
         Route::apiResource('nurseries', NurseryController::class);
-        Route::post('nurseries/{nursery}', [NurseryController::class, 'update'])->name('nurseries.update');
+        Route::post('nurseries/{nurseries}', [NurseryController::class, 'update'])->name('nurseries.update');
 
         // Nursery Controller
         Route::apiResource('schedules', ScheduleController::class);

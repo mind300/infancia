@@ -33,28 +33,28 @@ class NurseryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Nursery $nursery)
+    public function show(Nursery $nurseries)
     {
-        return contentResponse($nursery);
+        return contentResponse($nurseries);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(NurseryRequest $request, Nursery $nursery)
+    public function update(NurseryRequest $request, Nursery $nurseries)
     {
-        $nursery->update($request->validated());
-        $nursery->user()->update($request->validated());
-        add_media($nursery, $request, 'nurseries');
+        $nurseries->update($request->validated());
+        $nurseries->user()->update($request->validated());
+        add_media($nurseries, $request, 'nurseries');
         return messageResponse();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Nursery $nursery)
+    public function destroy(Nursery $nurseries)
     {
-        $nursery->forceDelete();
+        $nurseries->forceDelete();
         return messageResponse();
     }
 }
