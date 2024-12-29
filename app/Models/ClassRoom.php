@@ -52,4 +52,12 @@ class ClassRoom extends BaseModel
     {
         return $this->belongsToMany(Subject::class, 'class_room_subjects', 'class_room_id', 'subject_id')->withTimestamps();
     }
+
+    /**
+     * The Comment
+     */
+    public function schedules()
+    {
+        return $this->belongsToMany(Subject::class, 'schedules', 'class_room_id', 'subject_id')->withPivot('date');
+    }
 }

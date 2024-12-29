@@ -77,7 +77,7 @@ class KidController extends Controller
      */
     public function birthday()
     {
-        $birthdays = Kid::whereDay('birth_date', now())->get();
+        $birthdays = Kid::whereMonth('birth_date', now())->get();
         return contentResponse($birthdays);
     }
 }

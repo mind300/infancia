@@ -11,6 +11,7 @@ use App\Http\Controllers\Nurseries\NurseryController;
 use App\Http\Controllers\Parents\ParentController;
 use App\Http\Controllers\PaymentBills\PaymentBillController;
 use App\Http\Controllers\PaymentBills\PaymentBillsHistoryController;
+use App\Http\Controllers\Schedules\ScheduleController;
 use App\Http\Controllers\Subjects\SubjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -83,5 +84,9 @@ Route::group(['middleware' => 'api'], function () {
         // Nursery Controller
         Route::apiResource('nurseries', NurseryController::class);
         Route::post('nurseries/{nursery}', [NurseryController::class, 'update'])->name('nurseries.update');
+
+        // Nursery Controller
+        Route::apiResource('schedules', ScheduleController::class);
+        Route::post('schedules/{classRoom}', [ScheduleController::class, 'store'])->name('schedules.store');
     });
 });

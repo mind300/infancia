@@ -15,6 +15,7 @@ class Newsletter extends BaseModel
         'title',
         'content',
         'is_private',
+        'likes_count',
         'class_room_id',
         'branch_id',
         'nursery_id',
@@ -35,6 +36,14 @@ class Newsletter extends BaseModel
     public function class_room()
     {
         return $this->belongsTo(ClassRoom::class);
+    }
+
+    /**
+     * The Comment
+     */
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'model');
     }
 
     // =================================== Scopes ================================= //
