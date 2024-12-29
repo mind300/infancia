@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Schedules;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Schedules\ScheduleRequest;
 use App\Models\ClassRoom;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -26,6 +27,17 @@ class ScheduleController extends Controller
     public function store(ScheduleRequest $request, ClassRoom $classRoom)
     {
         $classRoom->schedules()->attach($request->safe());
+        return messageResponse();
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     */
+
+    public function destroy(Schedule $schedule)
+    {
+        $schedule->forceDelete();
         return messageResponse();
     }
 }

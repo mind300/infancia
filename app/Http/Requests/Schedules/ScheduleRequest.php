@@ -23,7 +23,6 @@ class ScheduleRequest extends FormRequest
     {
         return [
             //
-            'class_room_id' => 'required|integer|exists:class_rooms,id',
             'subject_id' => 'required|integer|exists:subjects,id',
             'date' => 'required',
             'content' => 'nullable|string',
