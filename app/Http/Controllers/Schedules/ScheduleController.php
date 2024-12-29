@@ -15,10 +15,21 @@ class ScheduleController extends Controller
      */
     public function index(Request $request)
     {
-        $schedules = ClassRoom::with(['schedules' => function ($query) use ($request) {
+        $classRoom = ClassRoom::with(['subjects.schedules' => function ($query) use ($request) {
             $query->where([['class_room_id', $request->class_room_id], ['date', $request->date]]);
         }])->find($request->class_room_id);
-        return contentResponse($schedules);
+
+        $subjects = $classRoom->subjects->flatMap(function ($subject) {
+            return [
+                'id' => $subject->id,
+                'title' => $subject->title,
+                'description' => $subject->description,
+                'schedules' => $subject->schedules->transform(function ($schedule) {
+                    return $schedule->pivot;
+                }),
+            ];
+        });
+        return contentResponse($subjects);
     }
 
     /**
