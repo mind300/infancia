@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('followup_id')->constrained('followups')->cascadeOnDelete();
             $table->foreignId('subject_id')->constrained('subjects')->cascadeOnDelete();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

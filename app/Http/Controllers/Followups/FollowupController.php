@@ -58,7 +58,7 @@ class FollowupController extends Controller
      */
     public function show(Followup $followup)
     {
-        return contentResponse($followup->load('meals'));
+        return contentResponse($followup->load('meals','subjects'));
     }
 
     /**

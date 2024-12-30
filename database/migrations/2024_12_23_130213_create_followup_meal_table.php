@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('followup_id')->constrained('followups')->cascadeOnDelete();
             $table->foreignId('meal_id')->constrained('meals')->cascadeOnDelete();
+            $table->integer('amount')->default(0);
             $table->timestamps();
         });
     }

@@ -37,7 +37,7 @@ class Followup extends BaseModel
      */
     public function meals()
     {
-        return $this->belongsToMany(Meal::class, 'followup_meal', 'followup_id', 'meal_id');
+        return $this->belongsToMany(Meal::class, 'followup_meal', 'followup_id', 'meal_id')->withPivot('amount');
     }
 
     /**
@@ -45,6 +45,6 @@ class Followup extends BaseModel
      */
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class, 'followup_subject', 'followup_id', 'subject_id');
+        return $this->belongsToMany(Subject::class, 'followup_subject', 'followup_id', 'subject_id')->withPivot('description');
     }
 }
