@@ -38,8 +38,6 @@ class ParentController extends Controller
             // Update the user
             $user = User::find($parent->user_id);
             $user->update($request->only(['name', 'email', 'phone']));
-
-            // Update parent data
             $parent->update($request->except(['name', 'email', 'phone', 'kids']));
 
             // Prepare kids data for upsert
@@ -57,7 +55,6 @@ class ParentController extends Controller
                 ['id'],
                 ['first_name', 'last_name', 'birth_date', 'gender', 'has_medical_case', 'description_medical_case']
             );
-
             DB::commit();
             return messageResponse();
         } catch (\Exception $e) {

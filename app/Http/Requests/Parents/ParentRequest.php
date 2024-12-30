@@ -45,6 +45,7 @@ class ParentRequest extends FormRequest
             'kids.*.classroom_id' => 'required|integer|exists:class_rooms,id',
             'kids.*.branch_id' => 'required|integer|exists:branches,id',
             'kids.*.nursery_id' => 'required|integer|exists:nurseries,id',
+            // 'kids.*.parent_id' => 'nullable|integer|exists:parents,id',
         ];
     }
 }

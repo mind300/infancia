@@ -38,6 +38,7 @@ class KidController extends Controller
             $parent->kids->each(function ($kid) use ($request) {
                 add_media($kid, $request, 'kids');
             });
+            $user->syncRoles(['parent']);
             DB::commit();
             return messageResponse();
         } catch (\Exception $error) {

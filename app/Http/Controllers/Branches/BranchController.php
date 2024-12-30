@@ -26,6 +26,7 @@ class BranchController extends Controller
         $user = User::create($request->validated() + ['password' => '12345test']);
         $branch = $user->manager_branch()->create($request->validated());
         $user->branch()->associate($branch)->save();
+        $user->syncRoles(['manager']);
         return messageResponse();
     }
 

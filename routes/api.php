@@ -4,6 +4,9 @@ use App\Http\Controllers\Followups\FollowupController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Branches\BranchController;
 use App\Http\Controllers\ClassRooms\ClassRoomController;
+use App\Http\Controllers\Faqs\FaqController;
+use App\Http\Controllers\Galleries\GalleryController;
+use App\Http\Controllers\Galleries\GalleryMediaController;
 use App\Http\Controllers\Kids\KidController;
 use App\Http\Controllers\Meals\MealController;
 use App\Http\Controllers\Newsletters\NewsletterController;
@@ -11,8 +14,10 @@ use App\Http\Controllers\Nurseries\NurseryController;
 use App\Http\Controllers\Parents\ParentController;
 use App\Http\Controllers\PaymentBills\PaymentBillController;
 use App\Http\Controllers\PaymentBills\PaymentBillsHistoryController;
+use App\Http\Controllers\Policies\PolicyController;
 use App\Http\Controllers\Schedules\ScheduleController;
 use App\Http\Controllers\Subjects\SubjectController;
+use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +51,10 @@ Route::group(['middleware' => 'api'], function () {
         // Branch Controller
         Route::apiResource('branches', BranchController::class);
 
+        // Users Controller
+        Route::apiResource('users', UserController::class);
+        Route::post('users/{user}', [UserController::class, 'update'])->name('users.update');
+
         // ClassRoom Controller
         Route::apiResource('classrooms', ClassRoomController::class);
         Route::post('classrooms/assign/subject/{classroom}', [ClassRoomController::class, 'assignSubject'])->name('classrooms.assignSubject');
@@ -63,6 +72,7 @@ Route::group(['middleware' => 'api'], function () {
         // Newsletter Controller
         Route::apiResource('newsletters', NewsletterController::class);
         Route::post('newsletters/{newsletter}', [NewsletterController::class, 'update'])->name('newsletters.update');
+        Route::post('newsletters/like/{newsletter}', [NewsletterController::class, 'likeOrUnlike'])->name('newsletters.likeOrUnlike');
 
         // Subject Controller
         Route::apiResource('subjects', SubjectController::class);
@@ -89,5 +99,19 @@ Route::group(['middleware' => 'api'], function () {
         // Nursery Controller
         Route::apiResource('schedules', ScheduleController::class);
         Route::post('schedules/{classRoom}', [ScheduleController::class, 'store'])->name('schedules.store');
+
+        // Policies Controller
+        Route::apiResource('policies', PolicyController::class);
+
+        // Faqs Controller
+        Route::apiResource('faqs', FaqController::class);
+
+        // Gallery Controller
+        Route::apiResource('galleries', GalleryController::class);
+
+        // Gallery / Media
+        Route::apiResource('gallery/medias', GalleryMediaController::class);
+        Route::get('gallery/medias/downloadSingle/{media}', [GalleryMediaController::class, 'download'])->name('medias.download');
+        Route::get('gallery/medias/download/zip/{gallery}', [GalleryMediaController::class, 'downloadMultiple'])->name('medias.downloadMultiple');
     });
 });

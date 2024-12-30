@@ -53,12 +53,20 @@ class BaseModel extends Model implements HasMedia
         $date = Carbon::parse($request->date);
         $query->whereDate('date', $date);
     }
-    
+
     /**
      * Scope a query to only include class.
      */
     public function scopeKidScope(Builder $query, $request): void
     {
         $query->where('kid_id', $request->kid_id);
+    }
+
+    /**
+     * Scope a query to only include class.
+     */
+    public function scopeNurseryScope(Builder $query, $request): void
+    {
+        $query->where('nursery_id', $request->nursery_id);
     }
 }

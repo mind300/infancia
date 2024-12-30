@@ -54,4 +54,19 @@ class NewsletterController extends Controller
         $newsletter->forceDelete();
         return messageResponse();
     }
+    /**
+     * Make like for specific news.
+     */
+    public function likeOrUnlike(Newsletter $newsletter)
+    {
+        $like = $newsletter->likes()->firstWhere('user_id', auth_user_id());
+        if ($like) {
+            $newsletter->decrement('likes_count');
+            $like->forceDelete(); // Dislike if already liked
+        } else {
+            $newsletter->likes()->create(['user_id' => auth_user_id()]); // Like if not already liked
+            $newsletter->increment('likes_count');
+        }
+        return messageResponse();
+    }
 }

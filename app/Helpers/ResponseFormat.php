@@ -11,7 +11,7 @@ if (!function_exists('authResponse')) {
             'phone' => auth_user()->phone,
             'nursery_id' => auth_user()->nursery_id,
             'branch_id' => auth_user()->branch_id,
-            'role' => 'owner',
+            'role' => auth_user()->roles[0]->name,
             'token' => $token,
             'message' => $message,
             'expire_in' => auth()->factory()->getTTL(),

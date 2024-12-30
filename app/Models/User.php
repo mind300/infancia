@@ -6,15 +6,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laratrust\Contracts\LaratrustUser;
+use Laratrust\Traits\HasRolesAndPermissions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject, HasMedia
+class User extends Authenticatable implements JWTSubject, HasMedia, LaratrustUser
 
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, InteractsWithMedia;
+    use HasFactory, Notifiable, InteractsWithMedia, HasRolesAndPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -106,6 +108,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     {
         return $this->hasOne(ParentKid::class);
     }
+    
     /**
      * Spatie media library register
      */
