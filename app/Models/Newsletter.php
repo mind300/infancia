@@ -20,9 +20,9 @@ class Newsletter extends BaseModel
         'branch_id',
         'nursery_id',
     ];
-    
+
     // =================================== Relations ================================= //
-      /**
+    /**
      * The Comment
      */
     public function nursery()
@@ -55,12 +55,25 @@ class Newsletter extends BaseModel
         $query->orWhere([['class_room_id', $request->class_room_id], ['is_private', 0]]);
     }
 
-     // =================================== Spatie ================================= //
+    // =================================== Spatie ================================= //
     /**
      * Spatie media library register
      */
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('newsletters')->singleFile();
+    }
+    // =================================== Observe ================================= //
+    /**
+     * Newsletter Observe
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::saving(function ($newsletter) {
+            if ($newsletter->class_room_id !== null) {
+                $newsletter->is_private = 1;
+            }
+        });
     }
 }

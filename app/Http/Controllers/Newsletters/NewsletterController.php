@@ -15,7 +15,7 @@ class NewsletterController extends Controller
     public function index(Request $request)
     {
         $newsletters = Newsletter::branchScope($request)->classPublicScope($request)->get();
-        return contentResponse($newsletters->load(['media','likes', 'class_room:id,name', 'nursery.media']));
+        return contentResponse($newsletters->load(['media', 'likes', 'class_room:id,name', 'nursery.media']));
     }
 
     /**
