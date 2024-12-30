@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('newsletters', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->longText('content');
+            $table->longText('content')->nullable();
             $table->boolean('is_private')->default(false);
             $table->integer('likes_count')->default(0);
             $table->foreignId('class_room_id')->nullable()->constrained('class_rooms');
