@@ -48,7 +48,7 @@ class NurserySeeder extends Seeder
             'branches_number' => 20,
         ]);
 
-    $user_2 = User::create([
+        $user_2 = User::create([
             'name' => 'Nursery 2',
             'email' => 'nursery2@gmail.com',
             'phone' => '01000111333',

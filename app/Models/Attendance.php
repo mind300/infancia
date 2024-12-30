@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
-
 class Attendance extends BaseModel
 {
     protected $fillable = [
@@ -30,7 +27,4 @@ class Attendance extends BaseModel
     {
         return $this->belongsTo(ClassRoom::class, 'class_room_id');
     }
-
-    
-  
 }

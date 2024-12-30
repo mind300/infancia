@@ -16,6 +16,7 @@ use App\Http\Controllers\Parents\ParentController;
 use App\Http\Controllers\PaymentBills\PaymentBillController;
 use App\Http\Controllers\PaymentBills\PaymentBillsHistoryController;
 use App\Http\Controllers\Policies\PolicyController;
+use App\Http\Controllers\Reviews\ReviewController;
 use App\Http\Controllers\Schedules\ScheduleController;
 use App\Http\Controllers\Subjects\SubjectController;
 use App\Http\Controllers\Users\UserController;
@@ -118,5 +119,8 @@ Route::group(['middleware' => 'api'], function () {
 
         // Dashboards
         Route::get('dashboards/nursery', [DashboardController::class, 'nursery']);
+
+        // Reviews
+        Route::apiResource('reviews', ReviewController::class);
     });
 });
