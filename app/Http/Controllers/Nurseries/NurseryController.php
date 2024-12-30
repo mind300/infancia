@@ -16,7 +16,7 @@ class NurseryController extends Controller
     public function index(NurseryStatusRequest $request)
     {
         $nurseries = Nursery::status($request)->paginate(10);
-        return contentResponse($nurseries);
+        return contentResponse($nurseries->load('media'));
     }
 
     /**
