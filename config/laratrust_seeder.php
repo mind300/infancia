@@ -25,6 +25,7 @@ return [
             "Faq" => true
         ],
         'manager' => [],
+        'admin' => [],
         'teacher' => [],
         'parent' => [],
     ],

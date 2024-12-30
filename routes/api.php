@@ -4,6 +4,7 @@ use App\Http\Controllers\Followups\FollowupController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Branches\BranchController;
 use App\Http\Controllers\ClassRooms\ClassRoomController;
+use App\Http\Controllers\Dashboards\DashboardController;
 use App\Http\Controllers\Faqs\FaqController;
 use App\Http\Controllers\Galleries\GalleryController;
 use App\Http\Controllers\Galleries\GalleryMediaController;
@@ -113,5 +114,8 @@ Route::group(['middleware' => 'api'], function () {
         Route::apiResource('gallery/medias', GalleryMediaController::class);
         Route::get('gallery/medias/downloadSingle/{media}', [GalleryMediaController::class, 'download'])->name('medias.download');
         Route::get('gallery/medias/download/zip/{gallery}', [GalleryMediaController::class, 'downloadMultiple'])->name('medias.downloadMultiple');
+
+        // Dashboards
+        Route::get('dashboards/nursery', [DashboardController::class, 'nursery']);
     });
 });

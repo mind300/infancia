@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
             'name' => 'required|string|max:50',
             'email' => 'required|email:filter|unique:users,email,' . $user_id,
             'phone' => 'required|string|unique:users,phone,' . $user_id,
-            'role' => 'required|string|in:manager,teacher',
+            'role' => 'required|string|in:admin,teacher',
             'nursery_id' => 'required|string|exists:nurseries',
             'branch_id' => 'required|string|exists:branches',
             'managments' => 'required|array',
