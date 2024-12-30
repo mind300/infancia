@@ -39,6 +39,7 @@ Route::group(['middleware' => 'api'], function () {
         Route::group(['middleware' => 'auth:api'], function () {
             Route::post('/me', 'me');
             Route::post('/logout', 'logout');
+            Route::post('/permissions', 'permissions');
         });
     });
 

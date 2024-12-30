@@ -56,6 +56,17 @@ class AuthController extends Controller
     }
 
     /**
+     * Get the user permissions.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function permissions()
+    {
+        $permssions = auth_user()->permissions->pluck('name');
+        return contentResponse($permssions);
+    }
+
+    /**
      * Refresh a token.
      *
      * @return \Illuminate\Http\JsonResponse
