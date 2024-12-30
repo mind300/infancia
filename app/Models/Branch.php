@@ -51,6 +51,22 @@ class Branch extends BaseModel
      */
     public function classes()
     {
-        return $this->hasMany(Nursery::class);
+        return $this->hasMany(ClassRoom::class);
+    }
+    
+    /**
+     * The Comment
+     */
+    public function kids()
+    {
+        return $this->hasMany(Kid::class);
+    }
+    
+    /**
+     * The Comment
+     */
+    public function employees()
+    {
+        return $this->hasMany(User::class)->whereHasRole(['admin', 'teacher']);
     }
 }
