@@ -13,16 +13,18 @@ return [
 
     'roles_structure' => [
         'owner' => [
+            "Manage-Classes" => true,
             "Nursery-Profile" => true,
-            "Manage-Classes"  => true,
-            "Meal" => true,
-            "NewsLetter" => true,
-            "Parent-Request" => true,
-            "Payment-History" => true,
-            "Payment-Request" => true,
+            "Meals" => true,
+            "Newsletter" => true,
             "Nursery-Policy" => true,
-            "Roles" => true,
-            "Faq" => true
+            "Faq" => true,
+            "Payment-Bills" => true,
+            "Payment-Request" => true,
+            "Admins" => true,
+            "Subjects" => true,
+            "Schedule" => true,
+            "Chats" => true,
         ],
         'manager' => [],
         'admin' => [],

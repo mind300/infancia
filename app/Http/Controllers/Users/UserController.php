@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::where('nursery_id', $request->nursery_id)->whereHasRole(['admin', 'teacher', 'parent'])->paginate(10);
+        $users = User::where('nursery_id', $request->nursery_id)->whereHasRole(['admin', 'teacher'])->paginate(10);
         return contentResponse($users);
     }
 

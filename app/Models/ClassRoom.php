@@ -15,6 +15,8 @@ class ClassRoom extends BaseModel
         'to',
         'has_meals',
         'has_subjects',
+        'has_nap',
+        'has_toilet',
         'branch_id',
         'nursery_id'
     ];
