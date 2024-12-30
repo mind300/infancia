@@ -15,7 +15,7 @@ class ReviewController extends Controller
     public function index(Request $request)
     {
         $reviews = Review::nurseryScope($request)->get();
-        return contentResponse($reviews);
+        return contentResponse($reviews->load('user'));
     }
 
     /**
@@ -32,7 +32,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        return contentResponse($review);
+        return contentResponse($review->load('user'));
     }
 
     /**
