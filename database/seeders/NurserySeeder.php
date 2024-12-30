@@ -26,13 +26,15 @@ class NurserySeeder extends Seeder
             'branches_number' => 20,
         ]);
 
-        User::create([
+        $user_1 = User::create([
             'name' => 'Nursery 1',
             'email' => 'nursery1@gmail.com',
             'phone' => '01000111222',
             'password' => '12345test',
             'nursery_id' => 1,
         ]);
+
+        $user_1->syncRoles(['owner']);
 
         // ======================= Nursery 2 ======================= //
         Nursery::create([
@@ -46,12 +48,13 @@ class NurserySeeder extends Seeder
             'branches_number' => 20,
         ]);
 
-        User::create([
+    $user_2 = User::create([
             'name' => 'Nursery 2',
             'email' => 'nursery2@gmail.com',
             'phone' => '01000111333',
             'password' => '12345test',
             'nursery_id' => 2,
         ]);
+        $user_2->syncRoles(['owner']);
     }
 }
