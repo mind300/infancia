@@ -39,7 +39,7 @@ class NurseryRequest extends FormRequest
             'contacts' => 'nullable|array',
             'contacts.*.id' => 'nullable|integer',
             'contacts.*.link' => 'required|string',
-            'contacts.*.type' => 'required|string|in:email, phone, social',
+            'contacts.*.type' => 'required|string|in:email,phone,social',
             'contacts.*.icon' => 'required|string',
         ];
     }
