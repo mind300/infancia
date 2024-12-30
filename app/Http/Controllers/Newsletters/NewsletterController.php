@@ -41,7 +41,7 @@ class NewsletterController extends Controller
      */
     public function update(NewsletterRequest $request, Newsletter $newsletter)
     {
-        $newsletter->update($request->valiadated());
+        $newsletter->update($request->validated());
         add_media($newsletter, $request, 'newsletters');
         return messageResponse();
     }
