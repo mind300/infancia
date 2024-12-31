@@ -13,6 +13,7 @@ class PaymentBill extends BaseModel
         'title',
         'description',
         'status',
+        'amount',
         'branch_id',
         'nursery_id',
     ];
