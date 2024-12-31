@@ -55,6 +55,13 @@ class Nursery extends BaseModel
     {
         return $this->hasMany(Contact::class);
     }
+    /**
+     * The Comment
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 
     // =================================== Scopes ================================= //
     /**

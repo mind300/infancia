@@ -3,11 +3,13 @@
 use App\Http\Controllers\Followups\FollowupController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Branches\BranchController;
+use App\Http\Controllers\Chats\ChatController;
 use App\Http\Controllers\ClassRooms\ClassRoomController;
 use App\Http\Controllers\Dashboards\DashboardController;
 use App\Http\Controllers\Faqs\FaqController;
 use App\Http\Controllers\Galleries\GalleryController;
 use App\Http\Controllers\Galleries\GalleryMediaController;
+use App\Http\Controllers\Guests\GuestController;
 use App\Http\Controllers\Kids\KidController;
 use App\Http\Controllers\Meals\MealController;
 use App\Http\Controllers\Newsletters\NewsletterController;
@@ -28,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+
 Route::group(['middleware' => 'api'], function () {
     Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function () {
         // Authentication
@@ -36,7 +39,7 @@ Route::group(['middleware' => 'api'], function () {
         Route::post('/password/forget', 'passwordForget');
         Route::post('/password/reset', 'passwordReset');
 
-        //Authorization
+        // Authorization
         Route::group(['middleware' => 'auth:api'], function () {
             Route::post('/me', 'me');
             Route::post('/logout', 'logout');
@@ -83,14 +86,14 @@ Route::group(['middleware' => 'api'], function () {
         // Meal Controller
         Route::apiResource('meals', MealController::class);
 
-        // Meal Controller
+        // Payment Bills Controller
         Route::apiResource('payemntbills', PaymentBillController::class);
         Route::post('payemntbills/{paymentBill}', [PaymentBillController::class, 'update'])->name('payemntbills.update');
 
         // Meal Controller
         Route::apiResource('payment/histories', PaymentBillsHistoryController::class);
 
-        // Folloup Controller
+        // Followup Controller
         Route::apiResource('followups', FollowupController::class);
         Route::post('followups/attendance', [FollowupController::class, 'store'])->name('followups.store');
         Route::post('followups/{followUp}', [FollowupController::class, 'update'])->name('followups.update');
@@ -99,7 +102,7 @@ Route::group(['middleware' => 'api'], function () {
         Route::apiResource('nurseries', NurseryController::class);
         Route::post('nurseries/{nurseries}', [NurseryController::class, 'update'])->name('nurseries.update');
 
-        // Nursery Controller
+        // Schedules Controller
         Route::apiResource('schedules', ScheduleController::class);
         Route::post('schedules/{classRoom}', [ScheduleController::class, 'store'])->name('schedules.store');
 
@@ -122,5 +125,16 @@ Route::group(['middleware' => 'api'], function () {
 
         // Reviews
         Route::apiResource('reviews', ReviewController::class);
+
+        // Chats
+        Route::apiResource('chats', ChatController::class);
     });
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Guest -- API Routes
+|--------------------------------------------------------------------------
+*/
+Route::apiResource('guest/nursery', GuestController::class);

@@ -14,7 +14,7 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $branches = Branch::whereBelongsTo(nursery())->withCount(['classes','kids', 'employees'])->get();
+        $branches = Branch::whereBelongsTo(nursery())->withCount(['classes', 'kids', 'employees'])->get();
         return contentResponse($branches);
     }
 

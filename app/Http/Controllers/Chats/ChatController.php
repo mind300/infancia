@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controller\Chats;
+namespace App\Http\Controllers\Chats;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Chats\MessageRequest;
 use App\Models\Chat;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -11,25 +13,27 @@ class ChatController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        $chats = Chat::query()->when($request->branch_id, function ($query) use ($request) {
+            $query->where('branch_id', $request->branch_id);
+        })->when($request->user_id, function ($query) use ($request) {
+            $query->where('user_id', $request->user_id);
+        })->with(['user', 'messages' => function ($query) {
+            $query->latest()->limit(1);
+        }])->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return contentResponse($chats);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MessageRequest $request)
     {
-        //
+        $chat = Chat::firstOrCreate($request->safe()->only(['branch_id', 'user_id']));
+        $message = Message::create($request->validated() + ['chat_id' => $chat->id]);
+        return messageResponse();
     }
 
     /**
@@ -37,15 +41,7 @@ class ChatController extends Controller
      */
     public function show(Chat $chat)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Chat $chat)
-    {
-        //
+        return contentResponse($chat->load('user', 'messages'));
     }
 
     /**
@@ -61,6 +57,7 @@ class ChatController extends Controller
      */
     public function destroy(Chat $chat)
     {
-        //
+        $chat->forceDelete();
+        return messageResponse();
     }
 }
