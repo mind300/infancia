@@ -56,20 +56,12 @@ class Kid extends BaseModel
         return $this->belongsTo(ClassRoom::class);
     }
 
-        /**
-     * The Comment
-     */
-    public function kid_payment_bills()
-    {
-        return $this->hasOne(KidPaymentBill::class, 'kid_id');
-    }
-
     /**
      * The Comment
      */
     public function payment_bills()
     {
-        return $this->belongsToMany(PaymentBill::class, 'kid_payment_bills')->withPivot('status','media');
+        return $this->belongsToMany(PaymentBill::class, 'kids_payment_bill')->withPivot('status');
     }
 
     /**
