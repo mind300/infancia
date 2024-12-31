@@ -47,9 +47,23 @@ class FollowupController extends Controller
      */
     public function update(FollowupRequest $request, Followup $followUp)
     {
+        // Update the follow-up details
         $followUp->update($request->safe()->except(['meals', 'subjects']));
-        $followUp->meals()->sync(collect($request->validated('meals'))->toArray());
-        $followUp->subjects()->sync(collect($request->validated('subjects')));
+
+        // Handle meals with pivot data (amount)
+        $meals = collect($request->validated('meals'))->mapWithKeys(function ($meal) {
+            return [$meal['meal_id'] => ['amount' => $meal['amount']]];
+        });
+
+        $followUp->meals()->sync($meals);
+
+        // Handle subjects (if applicable)
+        $subjects = collect($request->validated('subjects'))->mapWithKeys(function ($subject) {
+            return [$subject['subject_id'] => ['description' => $subject['description']]];
+        });
+
+        $followUp->subjects()->sync($subjects);
+
         return messageResponse();
     }
 
@@ -58,7 +72,7 @@ class FollowupController extends Controller
      */
     public function show(Followup $followup)
     {
-        return contentResponse($followup->load('meals','subjects'));
+        return contentResponse($followup->load('meals', 'subjects'));
     }
 
     /**
