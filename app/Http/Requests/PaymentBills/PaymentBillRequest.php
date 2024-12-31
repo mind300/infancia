@@ -21,6 +21,7 @@ class PaymentBillRequest extends FormRequest
      */
     public function rules(): array
     {
+        $payment_bill_id = $this->route('paymentBill.id');
         return [
             //
             'title' => 'required|string',
@@ -29,7 +30,7 @@ class PaymentBillRequest extends FormRequest
             'status' => 'required|string|in:mandatory,optional',
             'branch_id' => 'required|integer|exists:branches,id',
             'nursery_id' => 'required|integer|exists:nurseries,id',
-            'kids' => 'required|array',
+            'kids' => $payment_bill_id ? 'nullable|array' : 'required|array',
             'kids.*.id' => 'required|integer|exists:kids,id',
         ];
     }
