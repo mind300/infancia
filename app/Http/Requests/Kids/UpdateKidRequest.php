@@ -28,7 +28,7 @@ class UpdateKidRequest extends FormRequest
             'birth_date' => 'required|date',
             'has_medical_case' => 'nullable|string|in:yes,no',
             'description_medical_case' => 'required_with:has_medical_case|string',
-            'classroom_id' => 'required|integer|exists:class_rooms,id',
+            'class_room_id' => 'required|integer|exists:class_rooms,id',
             'branch_id' => 'required|integer|exists:branches,id',
             'nursery_id' => 'required|integer|exists:nurseries,id',
         ];

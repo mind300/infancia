@@ -22,14 +22,6 @@ class PaymentBill extends BaseModel
     /**
      * The Comment
      */
-    public function kid_payment_bill()
-    {
-        return $this->hasMany(KidPaymentBill::class, 'payment_bill_id');
-    }
-
-    /**
-     * The Comment
-     */
     public function nursery()
     {
         return $this->belongsTo(Nursery::class);
@@ -40,6 +32,6 @@ class PaymentBill extends BaseModel
      */
     public function kids()
     {
-        return $this->belongsToMany(Kid::class, 'kid_payment_bills')->withPivot('status')->with('media');
+        return $this->belongsToMany(Kid::class, 'kid_payment_bills')->withPivot('status');
     }
 }
