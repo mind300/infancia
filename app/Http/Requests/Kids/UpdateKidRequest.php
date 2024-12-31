@@ -24,6 +24,7 @@ class UpdateKidRequest extends FormRequest
         return [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
+            'gender' => 'required|in:boy,girl',
             'birth_date' => 'required|date',
             'has_medical_case' => 'nullable|string|in:yes,no',
             'description_medical_case' => 'required_with:has_medical_case|string',
