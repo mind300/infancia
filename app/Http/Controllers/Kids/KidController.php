@@ -22,7 +22,7 @@ class KidController extends Controller
     public function index(Request $request)
     {
         $kids = Kid::branchScope($request)->get();
-        return contentResponse($kids->load('parent'));
+        return contentResponse($kids->load('media','parent'));
     }
 
     /**
@@ -52,7 +52,7 @@ class KidController extends Controller
      */
     public function show(Kid $kid)
     {
-        return contentResponse($kid->load('parent.user'));
+        return contentResponse($kid->load('media','parent.user'));
     }
 
     /**

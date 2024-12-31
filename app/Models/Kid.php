@@ -22,6 +22,13 @@ class Kid extends BaseModel
         'class_room_id',
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = ['pivot'];
+
     // =================================== Relations ================================= //
 
     /**
@@ -59,17 +66,17 @@ class Kid extends BaseModel
     /**
      * The Comment
      */
-    public function payment_bills()
+    public function kid_payment_bill()
     {
-        return $this->belongsToMany(PaymentBill::class, 'kid_payment_bills')->withPivot('status');
+        return $this->hasOne(KidPaymentBill::class, 'kid_id');
     }
 
     /**
-     * One-to-many relationship with Attendance
+     * The Comment
      */
-    public function attendance()
+    public function kid_payment_bills()
     {
-        return $this->hasOne(Attendance::class, 'kid_id');
+        return $this->belongsToMany(PaymentBill::class, 'kid_payment_bills')->withPivot('status');
     }
 
     /**
@@ -78,6 +85,14 @@ class Kid extends BaseModel
     public function attendances()
     {
         return $this->hasMany(Attendance::class, 'kid_id');
+    }
+
+    /**
+     * One-to-many relationship with Attendance
+     */
+    public function attendance()
+    {
+        return $this->hasOne(Attendance::class, 'kid_id');
     }
 
     /**

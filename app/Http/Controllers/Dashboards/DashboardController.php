@@ -16,7 +16,7 @@ class DashboardController extends Controller
     public function nursery(Request $request)
     {
         // Employees Teachers Counts
-        $users_counts = User::where('nursery_id', $request->nursery_id)->whereHasRole(['admin', 'teacher'])->count();
+        $users_counts = User::where('branch_id', $request->branch_id)->whereHasRole(['admin', 'teacher'])->count();
         // Employees Counts
         $kids_counts = Kid::branchScope($request)->count();
         // Kids Counts

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\PaymentBills;
+namespace App\Http\Requests\KidPaymentBills;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PaiedRequest extends FormRequest
+class UpdateKidPaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,7 @@ class PaiedRequest extends FormRequest
     {
         return [
             //
-            'media' => 'nullable|image',
-            'payment_bill_id' => 'required|integer|exists:payment_bills,id',
-            'status' => 'required_without:media|string|in:rejected',
+            'status' => 'required|string|in:pending,review,accepted,rejected',
         ];
     }
 }

@@ -11,20 +11,27 @@ class PaymentBill extends BaseModel
      */
     protected $fillable = [
         'title',
-        'desciprtion',
+        'description',
         'status',
         'branch_id',
         'nursery_id',
     ];
 
     // =================================== Relations ================================= //
-
     /**
      * The Comment
      */
     public function nursery()
     {
         return $this->belongsTo(Nursery::class);
+    }
+
+    /**
+     * The Comment
+     */
+    public function kid_payment_bills()
+    {
+        return $this->hasMany(KidPaymentBill::class, 'payment_bill_id')->with('media');
     }
 
     /**

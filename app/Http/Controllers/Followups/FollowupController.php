@@ -48,7 +48,7 @@ class FollowupController extends Controller
     public function update(FollowupRequest $request, Followup $followUp)
     {
         $followUp->update($request->safe()->except(['meals', 'subjects']));
-        $followUp->meals()->sync(collect($request->validated('meals')));
+        $followUp->meals()->sync(collect($request->validated('meals'))->toArray());
         $followUp->subjects()->sync(collect($request->validated('subjects')));
         return messageResponse();
     }

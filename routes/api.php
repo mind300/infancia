@@ -10,13 +10,13 @@ use App\Http\Controllers\Faqs\FaqController;
 use App\Http\Controllers\Galleries\GalleryController;
 use App\Http\Controllers\Galleries\GalleryMediaController;
 use App\Http\Controllers\Guests\GuestController;
+use App\Http\Controllers\KidPyamentBills\KidPaymentBillController;
 use App\Http\Controllers\Kids\KidController;
 use App\Http\Controllers\Meals\MealController;
 use App\Http\Controllers\Newsletters\NewsletterController;
 use App\Http\Controllers\Nurseries\NurseryController;
 use App\Http\Controllers\Parents\ParentController;
 use App\Http\Controllers\PaymentBills\PaymentBillController;
-use App\Http\Controllers\PaymentBills\PaymentBillsHistoryController;
 use App\Http\Controllers\Policies\PolicyController;
 use App\Http\Controllers\Reviews\ReviewController;
 use App\Http\Controllers\Schedules\ScheduleController;
@@ -29,7 +29,6 @@ use Illuminate\Support\Facades\Route;
 | Authentication -- API Routes
 |--------------------------------------------------------------------------
 */
-
 
 Route::group(['middleware' => 'api'], function () {
     Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function () {
@@ -91,7 +90,8 @@ Route::group(['middleware' => 'api'], function () {
         Route::post('payemntbills/{paymentBill}', [PaymentBillController::class, 'update'])->name('payemntbills.update');
 
         // Meal Controller
-        Route::apiResource('payment/histories', PaymentBillsHistoryController::class);
+        Route::apiResource('kidpaymentbills', KidPaymentBillController::class);
+        Route::post('kidpaymentbills/{kidPaymentBill}', [KidPaymentBillController::class, 'update'])->name('kidpaymentbills.update');
 
         // Followup Controller
         Route::apiResource('followups', FollowupController::class);

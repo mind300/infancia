@@ -50,7 +50,7 @@ class ClassRoomController extends Controller
      */
     public function show(ClassRoom $classroom)
     {
-        return contentResponse($classroom->load('subjects', 'kids'));
+        return contentResponse($classroom->load('subjects', 'kids.media'));
     }
 
     /**

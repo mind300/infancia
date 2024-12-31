@@ -21,7 +21,14 @@ class KidPaymentBill extends BaseModel
      */
     public function paymentBill()
     {
-        return $this->belongsToMany(PaymentBill::class, 'payment_bill_id');
+        return $this->belongsTo(PaymentBill::class, 'payment_bill_id');
+    }
+    /**
+     * The Comment
+     */
+    public function kid()
+    {
+        return $this->belongsTo(Kid::class, 'kid_id');
     }
 
     // =================================== Spatie ================================= //

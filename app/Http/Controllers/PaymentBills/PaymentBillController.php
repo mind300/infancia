@@ -33,7 +33,7 @@ class PaymentBillController extends Controller
      */
     public function show(PaymentBill $payemntbill)
     {
-        return contentResponse($payemntbill->load('kids'));
+        return contentResponse($payemntbill->load('kids.kid_payment_bill.media'));
     }
 
     /**
