@@ -19,6 +19,14 @@ class PaymentBill extends BaseModel
 
     // =================================== Relations ================================= //
 
+         /**
+     * The Comment
+     */
+    public function kid_payment_bill()
+    {
+        return $this->hasMany(KidPaymentBill::class, 'payment_bill_id');
+    }
+
     /**
      * The Comment
      */
@@ -32,6 +40,6 @@ class PaymentBill extends BaseModel
      */
     public function kids()
     {
-        return $this->belongsToMany(Kid::class, 'kids_payment_bill')->withPivot('status');
+        return $this->belongsToMany(Kid::class, 'kid_payment_bills')->withPivot('status')->with('media');
     }
 }

@@ -34,7 +34,7 @@ class FollowupRequest extends FormRequest
             'subjects' => 'nullable|array',
             'subjects.*.subject_id' => 'required|integer|exists:subjects,id',
             'subjects.*.description' => 'nullable|string',
-            'kid_id' => 'required|integer|exists:kids,id',
+            // 'kid_id' => 'required|integer|exists:kids,id',
             'branch_id' => 'required|integer|exists:branches,id',
             'nursery_id' => 'required|integer|exists:nurseries,id',
         ];
