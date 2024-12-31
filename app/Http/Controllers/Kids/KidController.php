@@ -21,7 +21,7 @@ class KidController extends Controller
      */
     public function index(Request $request)
     {
-        $kids = Kid::branchScope($request)->paginate(10);
+        $kids = Kid::branchScope($request)->get();
         return contentResponse($kids->load('parent'));
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PaymentBills;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentBills\PaiedRequest;
 use App\Models\Kid;
+use App\Models\KidPaymentBill;
 use App\Models\PaymentBill;
 use Illuminate\Http\Request;
 
@@ -24,13 +25,13 @@ class PaymentBillsHistoryController extends Controller
      */
     public function store(PaiedRequest $request)
     {
-        $paymentBill = PaymentBill::find($request->validated('payment_bill_id'));
+        $paymentKidBill = KidPaymentBill::firstWhere('payment_bill_id', $request->payment_bill_id);
         $status = $request->validated('status');
         if ($request->hasFile('media')) {
             $status = 'review';
         }
-        $paymentBill->kids()->update(['status' => $status]);
-        add_media($paymentBill, $request, 'payment bills');
+        add_media($paymentKidBill, $request, 'kid payment bills ');
+        $paymentKidBill->paymentBill->kids()->update(['status' => $status]);
         return messageResponse();
     }
 }
