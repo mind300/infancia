@@ -24,7 +24,7 @@ class PaymentBillRequest extends FormRequest
         return [
             //
             'title' => 'required|string',
-            'descirption' => 'required|string',
+            'description' => 'required|string',
             'amount' => 'required|numeric',
             'status' => 'required|string|in:mandatory,optional',
             'branch_id' => 'required|integer|exists:branches,id',
