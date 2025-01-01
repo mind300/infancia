@@ -38,7 +38,7 @@ class NurseryRequest extends FormRequest
             'services.*.content' => 'required|string',
             'contacts' => 'nullable|array',
             'contacts.*.id' => 'nullable|integer',
-            'contacts.*.link' => 'required|string',
+            'contacts.*.link' => $this->type == 'social' ? 'require|url' : 'required|string',
             'contacts.*.type' => 'required|string|in:email,phone,social',
             'contacts.*.icon' => 'required|string',
         ];

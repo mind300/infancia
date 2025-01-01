@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Chats;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Chats\ChatRequest;
 use App\Http\Requests\Chats\MessageRequest;
 use App\Models\Chat;
 use App\Models\Message;
@@ -21,7 +22,7 @@ class ChatController extends Controller
             $query->where('user_id', $request->user_id);
         })->with(['user', 'messages' => function ($query) {
             $query->latest()->limit(1);
-        }])->get();
+        }])->latest()->get();
 
         return contentResponse($chats);
     }
@@ -29,10 +30,18 @@ class ChatController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(MessageRequest $request)
+    public function store(ChatRequest $request)
     {
         $chat = Chat::firstOrCreate($request->safe()->only(['branch_id', 'user_id']));
-        $message = Message::create($request->validated() + ['chat_id' => $chat->id]);
+        return messageResponse();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function storeMessage(MessageRequest $request)
+    {
+        $message = Message::create($request->validated());
         return messageResponse();
     }
 

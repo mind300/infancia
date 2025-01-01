@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Followups\AttendanceRequest;
 use App\Http\Requests\Followups\FollowupRequest;
 use App\Models\Attendance;
+use App\Models\ClassRoom;
 use App\Models\Followup;
 use App\Models\Kid;
 use Illuminate\Http\Request;
@@ -17,13 +18,14 @@ class FollowupController extends Controller
      */
     public function index(Request $request)
     {
-        $kids = Kid::classScope($request)->paginate(10);
+        $kids = Kid::classScope($request)->get();
+        $classRoom = ClassRoom::findOrFail($request->class_room_id);
         $kids->transform(function ($kid) use ($request) {
             $kid->attend = $kid->attendances()->where('kid_id', $kid->id)->attendanceDateScope($request)->exists();
             $kid->followup_id = $kid->followup_id = $kid->followup()->attendanceDateScope($request)->first()?->id;
             return $kid;
         });
-        return contentResponse($kids);
+        return contentResponse([$classRoom + $kids]);
     }
 
     /**

@@ -31,4 +31,6 @@ return [
         'teacher' => [],
         'parent' => [],
     ],
+
+    'permissions_map' => [],
 ];

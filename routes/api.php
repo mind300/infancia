@@ -128,6 +128,7 @@ Route::group(['middleware' => 'api'], function () {
 
         // Chats
         Route::apiResource('chats', ChatController::class);
+        Route::post('chats/send/message', [ChatController::class, 'storeMessage'])->name('chats.storeMessage');
     });
 });
 

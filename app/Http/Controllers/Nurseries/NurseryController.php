@@ -60,7 +60,7 @@ class NurseryController extends Controller
         $nursery->update(['rates' => $request->validated('rates')]);
         return messageResponse();
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
