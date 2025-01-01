@@ -24,7 +24,7 @@ class NewsletterRequest extends FormRequest
         return [
             'media' => 'nullable|image',
             'title' => 'required|string',
-            'content' => 'required|string',
+            'content' => 'nullable|string',
             'class_room_id' => 'nullable|exists:class_rooms,id',
             'branch_id' => 'required||integer|exists:branches,id',
             'nursery_id' => 'required|integer|exists:nurseries,id'
