@@ -26,7 +26,7 @@ class GuestController extends Controller
             })
             ->get();
 
-        return contentResponse($nurseries->load('media'));
+        return contentResponse($nurseries->load('media', 'branches'));
     }
 
 
@@ -35,6 +35,6 @@ class GuestController extends Controller
      */
     public function show(Nursery $nursery)
     {
-        return contentResponse($nursery->load('media', 'services', 'contacts', 'reviews'));
+        return contentResponse($nursery->load('media', 'services', 'contacts', 'reviews', 'branches'));
     }
 }
