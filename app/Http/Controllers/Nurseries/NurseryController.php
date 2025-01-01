@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Nurseries;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Nurseries\NurseryRequest;
 use App\Http\Requests\Nurseries\NurseryStatusRequest;
+use App\Http\Requests\Nurseries\RateNurseryRequest;
 use App\Models\Nursery;
 use App\Models\User;
 
@@ -51,6 +52,15 @@ class NurseryController extends Controller
         return messageResponse();
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function rates(RateNurseryRequest $request, Nursery $nursery)
+    {
+        $nursery->update(['rates' => $request->validated('rates')]);
+        return messageResponse();
+    }
+    
     /**
      * Remove the specified resource from storage.
      */

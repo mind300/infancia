@@ -19,13 +19,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->foreignIdFor(Country::class);
-            $table->foreignIdFor(City::class);
+            $table->string('country');
+            $table->string('city');
             $table->string('address');
             $table->longText('about')->nullable();
             $table->integer('branches_number')->default(0);
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->boolean('generate_branch')->default(false);
+            $table->integer('rates')->default(0);
             $table->foreignIdFor(User::class)->nullable()->cascadeOnDelete();
             $table->timestamps();
         });
