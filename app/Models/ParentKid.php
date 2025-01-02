@@ -23,7 +23,7 @@ class ParentKid extends BaseModel
     /**
      * The Comment
      */
-    public function nurseries()
+    public function nursery()
     {
         return $this->belongsTo(Nursery::class);
     }

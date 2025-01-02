@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Chats;
 
+use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Chats\ChatRequest;
 use App\Http\Requests\Chats\MessageRequest;
@@ -42,6 +43,7 @@ class ChatController extends Controller
     public function storeMessage(MessageRequest $request)
     {
         $message = Message::create($request->validated());
+        broadcast(new MessageSent($message))->toOthers();
         return messageResponse();
     }
 
