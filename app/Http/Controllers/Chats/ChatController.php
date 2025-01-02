@@ -33,7 +33,7 @@ class ChatController extends Controller
     public function store(ChatRequest $request)
     {
         $chat = Chat::firstOrCreate($request->safe()->only(['branch_id', 'user_id']));
-        return messageResponse();
+        return contentResponse(['chat_id' => $chat->id]);
     }
 
     /**
