@@ -66,7 +66,7 @@ class NurseryController extends Controller
         $user = $nursery->user()->create(collect($nursery)->toArray() + ['password' => '12345test']);
         $nursery->user()->associate($user)->save();
         $user->owner_nursery()->associate($nursery)->save();
-        $user_2->syncRoles(['owner']);
+        $user->syncRoles(['owner']);
         return messageResponse();
     }
 
