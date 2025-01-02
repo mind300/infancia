@@ -46,13 +46,22 @@ class NurseryController extends Controller
     {
         $nurseries->update($request->validated());
         $nurseries->user()->update($request->safe()->only(['email', 'phone']));
-        if($request->has('service')){
+        if ($request->has('service')) {
             $nurseries->services()->upsert($request->validated('services'), ['id'], ['content']);
         }
-        if($request->has('service')){
+        if ($request->has('contacts')) {
             $nurseries->contacts()->upsert($request->validated('contacts'), ['id'], ['link', 'type', 'icon']);
         }
         add_media($nurseries, $request, 'nurseries');
+        return messageResponse();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function nurseryApproved(RateNurseryRequest $request, Nursery $nursery)
+    {
+        $nursery->update(['rates' => $request->validated('rates')]);
         return messageResponse();
     }
 
