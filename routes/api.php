@@ -68,8 +68,8 @@ Route::group(['middleware' => 'api'], function () {
         // Parent Controller
         Route::apiResource('parents', ParentController::class);
         Route::post('parents/{parent}', [ParentController::class, 'update'])->name('parents.update');
-        Route::get('parents/kids/{user}', [ParentController::class, 'update'])->name('parents.parentKids');
-        Route::get('parents/branches/{user}', [ParentController::class, 'update'])->name('parents.parentKids');
+        Route::get('parents/kids/{user}', [ParentController::class, 'parentKids'])->name('parents.parentKids');
+        Route::get('parents/branches/{user}', [ParentController::class, 'parentBranches'])->name('parents.parentBranches');
 
         // Kid Controller
         Route::apiResource('kids', KidController::class);

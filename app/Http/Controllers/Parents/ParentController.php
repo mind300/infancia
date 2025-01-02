@@ -36,13 +36,14 @@ class ParentController extends Controller
         $parentKids = ParentKid::where('user_id', $user->id)->get();
         return contentResponse($parentKids->load('user', 'kids.branch'));
     }
+
     /**
      * Display the specified resource.
      */
     public function parentBranches(User $user)
     {
-        $parentKids = ParentKid::where('user_id', $user->id)->get();
-        return contentResponse($parentKids->load('user', 'kids.branch'));
+        $parent = ParentKid::firstWhere('user_id', $user->id);
+        return contentResponse($parent->branches);
     }
 
     /**

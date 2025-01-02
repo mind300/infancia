@@ -22,7 +22,7 @@ class KidController extends Controller
     public function index(Request $request)
     {
         $kids = Kid::branchScope($request)->get();
-        return contentResponse($kids->load('media','parent'));
+        return contentResponse($kids->load('media', 'parent'));
     }
 
     /**
@@ -34,6 +34,7 @@ class KidController extends Controller
         try {
             $user = User::create($request->validated() + ['password' => bcrypt('12345test')]); // Create the user
             $parent = $user->parent()->create($request->safe()->except(['name', 'email'])); // Create parent data
+            $parent->branches()->sync($request->validated('branch_id'));
             $parent->kids()->createMany($request->validated('kids')); // Create kids
             $parent->kids->each(function ($kid) use ($request) {
                 add_media($kid, $request, 'kids');
@@ -52,7 +53,7 @@ class KidController extends Controller
      */
     public function show(Kid $kid)
     {
-        return contentResponse($kid->load('media','parent.user'));
+        return contentResponse($kid->load('media', 'parent.user'));
     }
 
     /**

@@ -39,6 +39,14 @@ class ParentKid extends BaseModel
     /**
      * The Comment
      */
+    public function branches()
+    {
+        return $this->belongsToMany(Branch::class,'parent_branches','parent_id', 'branch_id');
+    }
+
+    /**
+     * The Comment
+     */
     public function kids()
     {
         return $this->hasMany(Kid::class, 'parent_id');
