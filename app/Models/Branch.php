@@ -13,6 +13,7 @@ class Branch extends BaseModel
      */
     protected $fillable = [
         'name',
+        'main',
         'country',
         'city',
         'address',
@@ -53,7 +54,7 @@ class Branch extends BaseModel
     {
         return $this->hasMany(ClassRoom::class);
     }
-    
+
     /**
      * The Comment
      */
@@ -61,7 +62,7 @@ class Branch extends BaseModel
     {
         return $this->hasMany(Kid::class);
     }
-    
+
     /**
      * The Comment
      */

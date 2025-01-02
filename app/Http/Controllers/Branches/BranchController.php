@@ -14,7 +14,7 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $branches = Branch::whereBelongsTo(nursery())->withCount(['classes', 'kids', 'employees'])->get();
+        $branches = Branch::where('nursery_id', nursery_id())->withCount(['classes', 'kids', 'employees'])->get();
         return contentResponse($branches);
     }
 
@@ -44,6 +44,16 @@ class BranchController extends Controller
     public function update(BranchRequest $request, Branch $branch)
     {
         $branch->update($request->validated());
+        return messageResponse();
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function main(Branch $branch)
+    {
+        Branch::where(['nursery_id' => $branch->nursery_id, ['main', 1]])->update(['main' => 0]);
+        $branch->update(['main' => 1]);
         return messageResponse();
     }
 

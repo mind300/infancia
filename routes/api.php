@@ -55,6 +55,7 @@ Route::group(['middleware' => 'api'], function () {
 
         // Branch Controller
         Route::apiResource('branches', BranchController::class);
+        Route::post('branches/main/{branch}', [BranchController::class, 'main'])->name('branches.main');
 
         // Users Controller
         Route::apiResource('users', UserController::class);
