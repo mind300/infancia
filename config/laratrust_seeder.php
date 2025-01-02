@@ -12,6 +12,7 @@ return [
     'truncate_tables' => true,
 
     'roles_structure' => [
+        'superadmin' => [],
         'owner' => [
             "Manage-Classes" => true,
             "Nursery-Profile" => true,

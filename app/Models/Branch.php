@@ -13,8 +13,8 @@ class Branch extends BaseModel
      */
     protected $fillable = [
         'name',
-        'country_id',
-        'city_id',
+        'country',
+        'city',
         'address',
         'manager_id',
         'nursery_id',

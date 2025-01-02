@@ -78,9 +78,9 @@ class KidController extends Controller
     /**
      * Display the specified resource.
      */
-    public function birthday()
+    public function birthday(Request $request)
     {
-        $kids = Kid::whereMonth('birth_date', now()->month())
+        $kids = Kid::branchScope($request)->whereMonth('birth_date', now()->month())
             ->orWhereMonth('birth_date', now()->addMonth()->month)
             ->get();
 
@@ -95,6 +95,6 @@ class KidController extends Controller
             }
         });
 
-        return messageResponse($kids);
+        return contentResponse($kids);
     }
 }

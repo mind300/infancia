@@ -15,11 +15,12 @@ class Nursery extends BaseModel
         'name',
         'email',
         'phone',
-        'country_id',
-        'city_id',
+        'country',
+        'city',
         'address',
         'about',
         'branches_number',
+        'status',
         'service_id',
         'user_id'
     ];

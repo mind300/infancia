@@ -82,7 +82,15 @@ class User extends Authenticatable implements JWTSubject, HasMedia, LaratrustUse
      */
     public function nursery()
     {
-        return $this->hasOne(Nursery::class);
+        return $this->hasOne(Nursery::class, 'user_id');
+    }
+
+    /**
+     * The Comment
+     */
+    public function owner_nursery()
+    {
+        return $this->belongsTo(Nursery::class, 'nursery_id');
     }
 
     /**
@@ -108,7 +116,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia, LaratrustUse
     {
         return $this->hasOne(ParentKid::class);
     }
-    
+
     /**
      * Spatie media library register
      */

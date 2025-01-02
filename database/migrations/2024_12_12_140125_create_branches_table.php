@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\City;
-use App\Models\Country;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('address')->nullable();
-            $table->foreignIdFor(Country::class);
-            $table->foreignIdFor(City::class);
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->foreignId('manager_id')->nullable()->constrained('users')->cascadeOnDelete();

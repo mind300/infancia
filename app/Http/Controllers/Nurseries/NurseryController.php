@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Nurseries\NurseryRequest;
 use App\Http\Requests\Nurseries\NurseryStatusRequest;
 use App\Http\Requests\Nurseries\RateNurseryRequest;
+use App\Http\Requests\Nurseries\StatusNurseryRequest;
 use App\Models\Nursery;
 use App\Models\User;
 
@@ -59,9 +60,12 @@ class NurseryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function nurseryApproved(RateNurseryRequest $request, Nursery $nursery)
+    public function status(StatusNurseryRequest $request, Nursery $nursery)
     {
-        $nursery->update(['rates' => $request->validated('rates')]);
+        $nursery->update(['status' => $request->validated('status')]);
+        $user = $nursery->user()->create(collect($nursery)->toArray() + ['password' => '12345test']);
+        $nursery->user()->associate($user)->save();
+        $user->owner_nursery()->associate($nursery)->save();
         return messageResponse();
     }
 
