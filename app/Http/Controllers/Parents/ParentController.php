@@ -33,7 +33,7 @@ class ParentController extends Controller
      */
     public function parentKids(User $user)
     {
-        $parentKids = ParentKid::where('user_id', $user->id)->get();
+        $parentKids = ParentKid::firstWhere('user_id', $user->id);
         return contentResponse($parentKids->load('user', 'kids.classRoom.branch'));
     }
 
