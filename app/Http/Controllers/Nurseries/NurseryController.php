@@ -8,6 +8,7 @@ use App\Http\Requests\Nurseries\NurseryStatusRequest;
 use App\Http\Requests\Nurseries\RateNurseryRequest;
 use App\Http\Requests\Nurseries\StatusNurseryRequest;
 use App\Models\Nursery;
+use App\Models\Permission;
 use App\Models\User;
 
 class NurseryController extends Controller
@@ -67,6 +68,8 @@ class NurseryController extends Controller
         $nursery->user()->associate($user)->save();
         $user->owner_nursery()->associate($nursery)->save();
         $user->syncRoles(['owner']);
+        $permssions = Permission::get();
+        $user->syncPermissions(collect($permssions)->toArray());
         return messageResponse();
     }
 

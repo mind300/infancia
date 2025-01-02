@@ -44,7 +44,7 @@ class ParentController extends Controller
     {
         $parent = ParentKid::firstWhere('user_id', $user->id);
         $branch = $parent->branches->transform(function ($branch) {
-            $branch->media = $branch->nursery?->media[0]->getUrl();
+            $branch->media = $branch->nursery->media ?? $branch->nursery->media[0]->getUrl();
             unset($branch->nursery);
             return $branch;
         });

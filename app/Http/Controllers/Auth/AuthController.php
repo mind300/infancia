@@ -55,15 +55,14 @@ class AuthController extends Controller
         return messageResponse('Successfully logged out');
     }
 
-    /**
-     * Get the user permissions.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function permissions()
     {
-        $permssions = auth_user()->permissions->pluck('name');
-        return contentResponse($permssions);
+        $roles = auth_user()->roles; // Get all roles of the authenticated user
+        if ($roles->isEmpty()) {
+            return contentResponse(['message' => 'The user has no roles.'], 404);
+        }
+        $permissions = $roles->load('permissions')->pluck('permissions')->flatten()->pluck('name')->unique();
+        return contentResponse(['role' => auth_user()->roles[0]->name, 'permissions' => $permissions]);
     }
 
     /**

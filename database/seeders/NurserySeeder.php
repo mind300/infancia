@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Nursery;
+use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -35,7 +36,8 @@ class NurserySeeder extends Seeder
         ]);
 
         $user_1->syncRoles(['owner']);
-
+        $allPermissions = Permission::all();
+        $user_1->syncPermissions($allPermissions);
         // ======================= Nursery 2 ======================= //
         Nursery::create([
             'name' => 'Nursery 2',
@@ -56,5 +58,7 @@ class NurserySeeder extends Seeder
             'nursery_id' => 2,
         ]);
         $user_2->syncRoles(['owner']);
+        $allPermissions = Permission::all();
+        $user_2->syncPermissions($allPermissions);
     }
 }
