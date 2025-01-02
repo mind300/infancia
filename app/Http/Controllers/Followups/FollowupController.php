@@ -25,7 +25,7 @@ class FollowupController extends Controller
             $kid->followup_id = $kid->followup_id = $kid->followup()->attendanceDateScope($request)->first()?->id;
             return $kid;
         });
-        return contentResponse([$classRoom + $kids]);
+        return contentResponse([$classRoom, $kids]);
     }
 
     /**

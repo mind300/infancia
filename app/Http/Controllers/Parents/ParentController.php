@@ -29,6 +29,15 @@ class ParentController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function parentKids(User $user)
+    {
+        $parentKids = ParentKid::where('user_id', $user->id)->get();
+        return contentResponse($parentKids->load('user', 'kids.branch'));
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(ParentRequest $request, ParentKid $parent)
@@ -62,7 +71,6 @@ class ParentController extends Controller
             return messageResponse($e->getMessage(), false, 500);
         }
     }
-
 
     /**
      * Remove the specified resource from storage.
