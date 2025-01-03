@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->longText('description')->nullable();
             $table->double('amount')->default(0);
-            $table->foreignId('nursery_id')->constrained('nurseries');
-            $table->foreignId('branch_id')->constrained('branches');
             $table->enum('status', ['mandatory', 'optional']);
+            $table->foreignId('branch_id')->constrained('branches');
+            $table->foreignId('nursery_id')->constrained('nurseries');
             $table->timestamps();
         });
     }

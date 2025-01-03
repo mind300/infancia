@@ -19,11 +19,10 @@ return new class extends Migration
             $table->enum('gender', ['boy', 'girl']);
             $table->boolean('has_medical_case')->default(false);
             $table->longText('description_medical_case')->nullable();
-
             $table->foreignId('parent_id')->constrained('parent_kids')->cascadeOnDelete();
-            $table->foreignId('nursery_id')->constrained('nurseries')->cascadeOnDelete();
-            $table->foreignId('branch_id')->constrained('branches');
             $table->foreignId('class_room_id')->constrained('class_rooms');
+            $table->foreignId('branch_id')->constrained('branches');
+            $table->foreignId('nursery_id')->constrained('nurseries')->cascadeOnDelete();
             $table->timestamps();
         });
     }

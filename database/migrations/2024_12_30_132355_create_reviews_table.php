@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->longText('review')->nullable();
             $table->integer('rate');
-            $table->foreignId('nursery_id')->constrained('nurseries')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('nursery_id')->constrained('nurseries')->onDelete('cascade');
             $table->timestamps();
         });
     }

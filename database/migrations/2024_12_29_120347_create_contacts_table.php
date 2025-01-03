@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('link');
+            $table->longText('link');
             $table->enum('type', ['email', 'phone', 'social']);
             $table->string('icon');
             $table->foreignId('nursery_id')->constrained('nurseries')->cascadeOnDelete();

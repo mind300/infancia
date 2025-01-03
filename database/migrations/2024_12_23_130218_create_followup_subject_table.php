@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('followup_subject', function (Blueprint $table) {
             $table->id();
+            $table->longText('description')->nullable();
             $table->foreignId('followup_id')->constrained('followups')->cascadeOnDelete();
             $table->foreignId('subject_id')->constrained('subjects')->cascadeOnDelete();
-            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }
