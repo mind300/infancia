@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LaratrustSeeder::class, // Laratrust Seeder
             SuperAdminSeeder::class, // Laratrust Seeder
-            // NurserySeeder::class, // Nursery Seeder
+            NurserySeeder::class, // Nursery Seeder
         ]);
     }
 }
