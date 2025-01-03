@@ -36,8 +36,8 @@ class NurserySeeder extends Seeder
         ]);
 
         $user_1->syncRoles(['owner']);
-        $allPermissions = Permission::all();
-        $user_1->syncPermissions($allPermissions);
+        $permssions = Permission::all();
+        $user_1->syncPermissions(collect($permssions)->toArray());
         // ======================= Nursery 2 ======================= //
         Nursery::create([
             'name' => 'Nursery 2',
@@ -58,7 +58,7 @@ class NurserySeeder extends Seeder
             'nursery_id' => 2,
         ]);
         $user_2->syncRoles(['owner']);
-        $allPermissions = Permission::all();
-        $user_2->syncPermissions($allPermissions);
+        $permssions = Permission::all();
+        $user_2->syncPermissions(collect($permssions)->toArray());
     }
 }
