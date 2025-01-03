@@ -19,7 +19,7 @@ class NurserySeeder extends Seeder
         Nursery::create([
             'name' => 'Nursery 1',
             'email' => 'nursery1@gmail.com',
-            'phone' => '01000111222',
+            'phone' => '01000111333',
             'country' => 'Egypt',
             'city' => 'Helioplis',
             'address' => 'Nasr City',
@@ -30,7 +30,7 @@ class NurserySeeder extends Seeder
         $user_1 = User::create([
             'name' => 'Nursery 1',
             'email' => 'nursery1@gmail.com',
-            'phone' => '01000111222',
+            'phone' => '01000111444',
             'password' => '12345test',
             'nursery_id' => 1,
         ]);
