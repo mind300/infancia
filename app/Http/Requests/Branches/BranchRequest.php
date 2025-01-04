@@ -25,8 +25,8 @@ class BranchRequest extends FormRequest
             'name' => 'nullable|string',
             'email' => 'required|email:filter|unique:users,email',
             'phone' => 'required|string|unique:users,phone',
-            'country_id' => 'required|integer',
-            'city_id' => 'required|integer',
+            'country' => 'required|integer',
+            'city' => 'required|integer',
             'address' => 'nullable|string',
             'nursery_id' => 'required|integer|exists:nurseries,id',
         ];
