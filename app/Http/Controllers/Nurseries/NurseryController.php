@@ -48,7 +48,7 @@ class NurseryController extends Controller
     {
         $nurseries->update($request->validated());
         $nurseries->user()->update($request->safe()->only(['email', 'phone']));
-        if ($request->has('service')) {
+        if ($request->has('services')) {
             $nurseries->services()->upsert($request->validated('services'), ['id'], ['content']);
         }
         if ($request->has('contacts')) {

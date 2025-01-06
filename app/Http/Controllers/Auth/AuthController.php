@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\Nursery;
+use App\Notifications\NurseryRegisterNotification;
 
 class AuthController extends Controller
 {
@@ -17,6 +18,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $nursery = Nursery::create($request->validated());
+        $nursery->notify(new NurseryRegisterNotification());
         return messageResponse();
     }
 
@@ -57,12 +59,12 @@ class AuthController extends Controller
 
     public function permissions()
     {
-        $roles = auth_user()->roles; // Get all roles of the authenticated user
+        $roles = auth_user()->roles;
         if ($roles->isEmpty()) {
-            return contentResponse(['message' => 'The user has no roles.'], 404);
+            return messageResponse('The user has no roles.', false, 404);
         }
-        $permissions = $roles->load('permissions')->pluck('permissions')->flatten()->pluck('name')->unique();
-        return contentResponse(['role' => auth_user()->roles[0]->name, 'permissions' => $permissions]);
+        $permissions = auth_user()->permissions;
+        return contentResponse(['role' => auth_user()->roles[0]->name, 'permissions' => $permissions->pluck('name')]);
     }
 
     /**

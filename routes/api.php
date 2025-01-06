@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Followups\FollowupController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Branches\BranchController;
 use App\Http\Controllers\Chats\ChatController;
 use App\Http\Controllers\ClassRooms\ClassRoomController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Guests\GuestController;
 use App\Http\Controllers\KidPyamentBills\KidPaymentBillController;
 use App\Http\Controllers\Kids\KidController;
 use App\Http\Controllers\Meals\MealController;
+use App\Http\Controllers\Messages\MessageController;
 use App\Http\Controllers\Newsletters\NewsletterController;
 use App\Http\Controllers\Nurseries\NurseryController;
 use App\Http\Controllers\Parents\ParentController;
@@ -74,8 +76,9 @@ Route::group(['middleware' => 'api'], function () {
 
         // Kid Controller
         Route::apiResource('kids', KidController::class);
-        Route::get('kids/birthday/comming', [KidController::class, 'birthday']);
         Route::post('kids/{kid}', [KidController::class, 'update'])->name('kids.update');
+        Route::get('kids/birthday/comming', [KidController::class, 'birthday'])->name('kids.birthday');
+        Route::get('kids/followup/{kid}', [KidController::class, 'followup'])->name('kids.followup');
 
         // Newsletter Controller
         Route::apiResource('newsletters', NewsletterController::class);
@@ -132,6 +135,7 @@ Route::group(['middleware' => 'api'], function () {
 
         // Chats
         Route::apiResource('chats', ChatController::class);
+        Route::apiResource('messages', MessageController::class);
         Route::post('chats/send/message', [ChatController::class, 'storeMessage'])->name('chats.storeMessage');
     });
 });
@@ -143,3 +147,4 @@ Route::group(['middleware' => 'api'], function () {
 |--------------------------------------------------------------------------
 */
 Route::apiResource('guest/nursery', GuestController::class);
+Route::apiResource('blogs', BlogController::class);

@@ -26,7 +26,6 @@ class MessageRequest extends FormRequest
             'message' => 'required|string',
             'chat_id' => 'required|string',
             'sender_id' => 'required|integer',
-            // 'sender_type' => 'nullable|in:branch,parent',
         ];
     }
 }

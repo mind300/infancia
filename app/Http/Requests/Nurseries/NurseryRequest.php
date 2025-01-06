@@ -21,12 +21,12 @@ class NurseryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $nursery_id = $this->route('nurseries.id');
+        $user_id = $this->route('nurseries.user_id');
         return [
             // Validations Nursery
             'name' => 'required|string',
-            'email' => 'required|string|unique:users,email,' .  $nursery_id,
-            'phone' => 'required|string|unique:users,phone,' .  $nursery_id,
+            'email' => 'required|string|unique:users,email,' .  $user_id,
+            'phone' => 'required|string|unique:users,phone,' .  $user_id,
             'country' => 'nullable|string',
             'city' => 'nullable|string',
             'address' => 'nullable|string',

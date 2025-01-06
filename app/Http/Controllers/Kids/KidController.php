@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\Kids\StoreKidRequest;
 use App\Http\Requests\Kids\UpdateKidRequest;
+use App\Models\Followup;
 use Carbon\Carbon;
 
 class KidController extends Controller
@@ -67,15 +68,6 @@ class KidController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Kid $kid)
-    {
-        $kid->forceDelete();
-        return messageResponse();
-    }
-
-    /**
      * Display the specified resource.
      */
     public function birthday(Request $request)
@@ -96,5 +88,29 @@ class KidController extends Controller
         });
 
         return contentResponse($kids);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function followup(Request $request, Kid $kid)
+    {
+        $date = Carbon::parse($request->date);
+        $followup = Followup::where('kid_id', $kid->id)->whereDate('date', $date)->first();
+        return contentResponse($followup->load('meals', 'subjects'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Kid $kid)
+    {
+        $parent = $kid->parent;
+        if ($parent->kids()->count() == 1) {
+            $parent->forceDelete();
+        } else {
+            $kid->forceDelete();
+        }
+        return messageResponse();
     }
 }

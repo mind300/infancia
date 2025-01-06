@@ -21,9 +21,27 @@ class ChatController extends Controller
             $query->where('branch_id', $request->branch_id);
         })->when($request->user_id, function ($query) use ($request) {
             $query->where('user_id', $request->user_id);
-        })->with(['user', 'messages' => function ($query) {
+        })->with(['messages' => function ($query) {
             $query->latest()->limit(1);
         }])->latest()->get();
+
+        if ($request->has('user_id')) {
+            $chats->transform(function ($chat) {
+                $chat->user = $chat->branch->user;
+                return $chat;
+            });
+        }
+        if ($request->has('branch_id')) {
+            $chats->transform(function ($chat) {
+                $chat->user = $chat->user;
+                return $chat;
+            });
+        }
+
+        // Unset the branch relationship for each chat
+        $chats->each(function ($chat) {
+            unset($chat->branch);
+        });
 
         return contentResponse($chats);
     }

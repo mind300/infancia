@@ -85,7 +85,7 @@ class ParentController extends Controller
             return messageResponse($e->getMessage(), false, 500);
         }
     }
-
+  
     /**
      * Remove the specified resource from storage.
      */
