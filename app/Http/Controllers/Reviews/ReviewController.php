@@ -24,9 +24,6 @@ class ReviewController extends Controller
     public function store(ReviewRequest $request)
     {
         $review = Review::create($request->validated());
-        $averageRating = $review->nursery->reviews()->avg('rate');
-        $review->nursery->rates = $averageRating;
-        $review->nursery->save();
         return messageResponse();
     }
 

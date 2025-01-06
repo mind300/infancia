@@ -38,6 +38,7 @@ class NurseryController extends Controller
      */
     public function show(Nursery $nurseries)
     {
+        $nurseries->rating = $nurseries->reviews()->avg('rate');
         return contentResponse($nurseries->load('media', 'services', 'contacts'));
     }
 
