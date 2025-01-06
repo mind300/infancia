@@ -34,7 +34,7 @@ class ParentController extends Controller
     public function parentKids(User $user)
     {
         $parentKids = ParentKid::firstWhere('user_id', $user->id);
-        return contentResponse($parentKids->load('user', 'kids.classRoom.branch'));
+        return contentResponse($parentKids->load('user', 'kids.media', 'kids.classRoom.branch'));
     }
 
     /**
@@ -85,7 +85,7 @@ class ParentController extends Controller
             return messageResponse($e->getMessage(), false, 500);
         }
     }
-  
+
     /**
      * Remove the specified resource from storage.
      */
