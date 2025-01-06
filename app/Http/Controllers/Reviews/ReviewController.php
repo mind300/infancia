@@ -15,7 +15,7 @@ class ReviewController extends Controller
     public function index(Request $request)
     {
         $reviews = Review::nurseryScope($request)->get();
-        return contentResponse($reviews->load('user'));
+        return contentResponse($reviews->load('user.media'));
     }
 
     /**
@@ -24,6 +24,9 @@ class ReviewController extends Controller
     public function store(ReviewRequest $request)
     {
         $review = Review::create($request->validated());
+        $averageRating = $review->nursery->reviews()->avg('rate');
+        $review->nursery->rates = $averageRating;
+        $review->nursery->save();
         return messageResponse();
     }
 
@@ -32,7 +35,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        return contentResponse($review->load('user'));
+        return contentResponse($review->load('user.media'));
     }
 
     /**
