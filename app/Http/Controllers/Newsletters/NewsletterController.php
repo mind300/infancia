@@ -15,7 +15,7 @@ class NewsletterController extends Controller
     public function index(Request $request)
     {
         $newsletters = Newsletter::branchScope($request)->classPublicScope($request)->latest()->get();
-        return contentResponse($newsletters->load(['media', 'likes', 'class_room:id,name', 'nursery.media']));
+        return contentResponse($newsletters->load(['nursery', 'media', 'likes', 'class_room:id,name', 'nursery.media']));
     }
 
     /**
@@ -33,7 +33,7 @@ class NewsletterController extends Controller
      */
     public function show(Newsletter $newsletter)
     {
-        return contentResponse($newsletter->load('media'));
+        return contentResponse($newsletter->load('media', 'nursery'));
     }
 
     /**
