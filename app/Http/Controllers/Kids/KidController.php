@@ -96,7 +96,7 @@ class KidController extends Controller
     public function followup(Request $request, Kid $kid)
     {
         $date = Carbon::parse($request->date);
-        $followup = Followup::where('kid_id', $kid->id)->whereDate('date', $date)->first();
+        $followup = Followup::where('kid_id', $kid->id)->whereDate('date', $date)->firstOrFail();
         return contentResponse($followup->load('meals', 'subjects'));
     }
 

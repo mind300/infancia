@@ -35,7 +35,7 @@ class ParentRequest extends FormRequest
             'emergency_phone' => 'required|string',
 
             // Kid Validations
-            'kids' => 'required|array',
+            'kids' => 'nullable|array',
             'kids.*.first_name' => 'required|string',
             'kids.*.last_name' => 'required|string',
             'kids.*.birth_date' => 'required|date',
