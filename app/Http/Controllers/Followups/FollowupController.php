@@ -33,7 +33,7 @@ class FollowupController extends Controller
      */
     public function store(AttendanceRequest $request)
     {
-        $attendance = Attendance::kidScope($request)->scopeAttendanceDateScope($request)->first();
+        $attendance = Attendance::kidScope($request)->AttendanceDateScope($request)->first();
         // dump($attendance, $request);
         if (!$attendance) {
             $attendance = Attendance::create($request->validated());
