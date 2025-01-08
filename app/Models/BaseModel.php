@@ -69,4 +69,5 @@ class BaseModel extends Model implements HasMedia
     {
         $query->where('nursery_id', $request->nursery_id);
     }
+  
 }

@@ -27,4 +27,6 @@ class Attendance extends BaseModel
     {
         return $this->belongsTo(ClassRoom::class, 'class_room_id');
     }
+
+    
 }
