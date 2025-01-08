@@ -36,6 +36,6 @@ class GuestController extends Controller
     public function show(Nursery $nursery)
     {
         $nursery->rates = round((float) $nursery->reviews()->avg('rate'), 1);
-        return contentResponse($nursery->load('media', 'services', 'contacts', 'reviews', 'branches'));
+        return contentResponse($nursery->load('media', 'services', 'contacts', 'reviews.user', 'branches'));
     }
 }
