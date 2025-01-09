@@ -26,28 +26,37 @@ class KidController extends Controller
         return contentResponse($kids->load('media', 'parent'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreKidRequest $request)
     {
         DB::beginTransaction();
         try {
-            $user = User::create($request->validated() + ['password' => bcrypt('12345test')]); // Create the user
-            $parent = $user->parent()->create($request->safe()->except(['name', 'email'])); // Create parent data
+            // Create the user and associated parent data
+            $user = User::create($request->validated() + ['password' => bcrypt('12345test')]);
+            $parent = $user->parent()->create($request->safe()->except(['name', 'email']));
             $parent->branches()->sync($request->validated('branch_id'));
-            $parent->kids()->createMany($request->validated('kids')); // Create kids
-            $parent->kids->each(function ($kid) use ($request) {
-                add_media($kid, $request, 'kids');
-            });
+
+            // Create the kids and store them in the database
+            $kids = $parent->kids()->createMany($request->validated('kids'));
+
+            // Loop over each kid and add their media
+            foreach ($kids as $index => $kid) {
+                if ($request->hasFile("kids.{$index}.media")) {
+                    $kid->addMediaFromRequest("kids.{$index}.media")
+                        ->toMediaCollection('kids'); // specify collection name, e.g., 'kids'
+                }
+            }
+
+            // Assign roles to the user
             $user->syncRoles(['parent']);
+
             DB::commit();
-            return messageResponse();
+            return messageResponse(); // Success response
         } catch (\Exception $error) {
             DB::rollBack();
-            return messageResponse($error->getMessage(), false, 500);
+            return messageResponse($error->getMessage(), false, 500); // Error response
         }
     }
+
 
     /**
      * Display the specified resource.

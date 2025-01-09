@@ -110,5 +110,7 @@ class Kid extends BaseModel
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('kids')->singleFile();
+        
     }
+
 }

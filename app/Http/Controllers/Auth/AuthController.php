@@ -19,7 +19,7 @@ class AuthController extends Controller
     {
         $nursery = Nursery::create($request->validated());
         if ($request->validated('generate_branch') == 1) {
-            $nursery->branch->create($request->validated());
+            $nursery->branch->create($request->validated() + ['main' => 1]);
         }
         $nursery->notify(new NurseryRegisterNotification());
         return messageResponse();
