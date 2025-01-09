@@ -23,7 +23,7 @@ class MediaFollowupRequest extends FormRequest
     {
         return [
             //
-            'media' => 'nullable|media'
+            'media' => 'nullable|image'
         ];
     }
 }
