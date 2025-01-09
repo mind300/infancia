@@ -23,7 +23,8 @@ class ClassRoomSubjectRequest extends FormRequest
     {
         return [
             //
-            'subjects' => 'required|array',
+            'subject_id' => 'required_without:subjects',
+            'subjects' => 'required_without:subject_id|array',
             'subjects.*.subject_id' => 'required|integer|exists:subjects,id',
         ];
     }

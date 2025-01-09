@@ -66,6 +66,7 @@ Route::group(['middleware' => 'api'], function () {
         // ClassRoom Controller
         Route::apiResource('classrooms', ClassRoomController::class);
         Route::post('classrooms/assign/subject/{classroom}', [ClassRoomController::class, 'assignSubject'])->name('classrooms.assignSubject');
+        Route::post('classrooms/delete/assign/subject/{classroom}', [ClassRoomController::class, 'deleteAssignSubject'])->name('classrooms.deleteAssignSubject');
         Route::get('classroom/subjects/{classroom}', [ClassRoomController::class, 'classSubjects'])->name('classrooms.classSubjects');
 
         // Parent Controller

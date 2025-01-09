@@ -36,6 +36,15 @@ class ClassRoomController extends Controller
         $classroom->subjects()->sync(collect($request->validated('subjects'))->pluck('subject_id'));
         return messageResponse();
     }
+    
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function deleteAssignSubject(ClassRoomSubjectRequest $request, ClassRoom $classroom)
+    {
+        $classroom->subjects()->detach($request->validated('subject_id'));
+        return messageResponse();
+    }
 
     /**
      * Store a newly created resource in storage.
