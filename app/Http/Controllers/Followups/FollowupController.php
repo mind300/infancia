@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Followups;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Followups\AttendanceRequest;
 use App\Http\Requests\Followups\FollowupRequest;
+use App\Http\Requests\Followups\MediaFollowupRequest;
 use App\Models\Attendance;
 use App\Models\ClassRoom;
 use App\Models\Followup;
@@ -65,9 +66,17 @@ class FollowupController extends Controller
             return [$subject['subject_id'] => ['description' => $subject['description']]];
         });
 
-        add_media($followUp, $request, 'followups');
         $followUp->subjects()->sync($subjects);
 
+        return messageResponse();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function addMedia(MediaFollowupRequest $request, Followup $followUp)
+    {
+        add_media($followUp, $request, 'followups');
         return messageResponse();
     }
 
@@ -76,7 +85,7 @@ class FollowupController extends Controller
      */
     public function show(Followup $followup)
     {
-        return contentResponse($followup->load('media','meals', 'subjects'));
+        return contentResponse($followup->load('media', 'meals', 'subjects'));
     }
 
     /**
