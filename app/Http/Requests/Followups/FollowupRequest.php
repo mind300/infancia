@@ -22,7 +22,6 @@ class FollowupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'media' => 'required|image',
             'napping' => 'required',
             'daiper' => 'nullable|integer',
             'potty' => 'nullable|integer',
