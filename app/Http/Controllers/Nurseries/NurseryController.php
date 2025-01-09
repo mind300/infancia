@@ -29,7 +29,7 @@ class NurseryController extends Controller
     {
         $user = User::create($request->validated() + ['password' => '12345test']);
         $nursery = $user->nursery()->create($request->validated());
-        add_media($nursery, $request, 'nurseries');
+        add_media($nursery, $request, 'nursery');
         return messageResponse();
     }
 
@@ -55,7 +55,7 @@ class NurseryController extends Controller
         if ($request->has('contacts')) {
             $nurseries->contacts()->upsert($request->validated('contacts'), ['id'], ['link', 'type', 'icon']);
         }
-        add_media($nurseries, $request, 'nurseries');
+        add_media($nurseries, $request, 'nursery');
         return messageResponse();
     }
 
