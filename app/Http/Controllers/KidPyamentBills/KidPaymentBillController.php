@@ -17,7 +17,7 @@ class KidPaymentBillController extends Controller
     public function index(Request $request)
     {
         $kids = Kid::find($request->kid_id);
-        return contentResponse($kids->load('kid_payment_bills'));
+        return contentResponse($kids->load('nursery:id,name', 'kid_payment_bills'));
     }
 
     /**
@@ -31,7 +31,7 @@ class KidPaymentBillController extends Controller
             $status = 'review';
         }
         add_media($paymentKidBill, $request, 'kid payment bills');
-        $paymentKidBill->paymentBill->kids()->update(['status' => $status]);
+        $paymentKidBill->paymentBill->kid()->update(['status' => $status]);
         return messageResponse();
     }
 
