@@ -24,7 +24,7 @@ class StoreKidPaymentRequest extends FormRequest
         return [
             //
             'media' => 'nullable|image',
-            'payment_bill_id' => 'required|integer|exists:payment_bills,id',
+            'kid_payment_bill_id' => 'required|integer|exists:kid_payment_bills,id',
             'status' => 'required_without:media|string|in:rejected',
         ];
     }

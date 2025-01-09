@@ -23,7 +23,7 @@ class MealRequest extends FormRequest
     {
         return [
             'meal' => 'required|string',
-            'type' => 'required|string|in:Breakfast,Launch,Snacks',
+            'type' => 'required|string|in:Breakfast,Lunch,Snacks',
             'branch_id' => 'required||integer|exists:branches,id',
             'nursery_id' => 'required||integer|exists:nurseries,id'
         ];

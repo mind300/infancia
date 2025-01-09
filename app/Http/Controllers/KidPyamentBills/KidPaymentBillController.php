@@ -25,13 +25,13 @@ class KidPaymentBillController extends Controller
      */
     public function store(StoreKidPaymentRequest $request)
     {
-        $paymentKidBill = KidPaymentBill::firstWhere('payment_bill_id', $request->payment_bill_id);
+        $paymentKidBill = KidPaymentBill::findOrFail($request->kid_payment_bill_id);
         $status = $request->validated('status');
         if ($request->hasFile('media')) {
             $status = 'review';
         }
         add_media($paymentKidBill, $request, 'kid payment bills');
-        $paymentKidBill->paymentBill->kid()->update(['status' => $status]);
+        $paymentKidBill->update(['status' => $status]);
         return messageResponse();
     }
 
