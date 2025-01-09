@@ -65,6 +65,7 @@ class FollowupController extends Controller
             return [$subject['subject_id'] => ['description' => $subject['description']]];
         });
 
+        add_media($followUp, $request, 'followups');
         $followUp->subjects()->sync($subjects);
 
         return messageResponse();

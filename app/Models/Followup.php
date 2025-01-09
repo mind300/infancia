@@ -47,4 +47,12 @@ class Followup extends BaseModel
     {
         return $this->belongsToMany(Subject::class, 'followup_subject', 'followup_id', 'subject_id')->withPivot('description');
     }
+
+    /**
+     * Spatie media library register
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('followups')->singleFile();
+    }
 }
