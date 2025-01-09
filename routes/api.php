@@ -104,6 +104,7 @@ Route::group(['middleware' => 'api'], function () {
         Route::apiResource('followups', FollowupController::class);
         Route::post('followups/attendance', [FollowupController::class, 'store'])->name('followups.store');
         Route::post('followups/{followUp}', [FollowupController::class, 'update'])->name('followups.update');
+        Route::post('followups/media/{followUp}', [FollowupController::class, 'media'])->name('followups.media');
 
         // Nursery Controller
         Route::apiResource('nurseries', NurseryController::class);

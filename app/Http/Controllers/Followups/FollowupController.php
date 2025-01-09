@@ -74,7 +74,7 @@ class FollowupController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function addMedia(MediaFollowupRequest $request, Followup $followUp)
+    public function media(MediaFollowupRequest $request, Followup $followUp)
     {
         add_media($followUp, $request, 'followups');
         return messageResponse();
