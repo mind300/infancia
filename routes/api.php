@@ -16,6 +16,7 @@ use App\Http\Controllers\Kids\KidController;
 use App\Http\Controllers\Meals\MealController;
 use App\Http\Controllers\Messages\MessageController;
 use App\Http\Controllers\Newsletters\NewsletterController;
+use App\Http\Controllers\Notifications\NotificationController;
 use App\Http\Controllers\Nurseries\NurseryController;
 use App\Http\Controllers\Parents\ParentController;
 use App\Http\Controllers\PaymentBills\PaymentBillController;
@@ -98,7 +99,7 @@ Route::group(['middleware' => 'api'], function () {
 
         // Meal Controller
         Route::apiResource('kidpaymentbills', KidPaymentBillController::class);
-        Route::post('kidpaymentbills/{kidPaymentBill}', [KidPaymentBillController::class, 'update'])->name('kidpaymentbills.update');
+        Route::post('kidpaymentbills/{kidpaymentbill}', [KidPaymentBillController::class, 'update'])->name('kidpaymentbills.update');
 
         // Followup Controller
         Route::apiResource('followups', FollowupController::class);
@@ -139,6 +140,9 @@ Route::group(['middleware' => 'api'], function () {
         Route::apiResource('chats', ChatController::class);
         Route::apiResource('messages', MessageController::class);
         Route::post('chats/send/message', [ChatController::class, 'storeMessage'])->name('chats.storeMessage');
+
+        // Notifications
+        Route::post('send-notification', [NotificationController::class, 'sendPushNotification']);
     });
 });
 
@@ -149,4 +153,4 @@ Route::group(['middleware' => 'api'], function () {
 |--------------------------------------------------------------------------
 */
 Route::apiResource('guest/nursery', GuestController::class);
-Route::apiResource('blogs', BlogController::class);
+// Route::apiResource('blogs', BlogController::class);

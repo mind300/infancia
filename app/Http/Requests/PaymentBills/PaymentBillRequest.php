@@ -21,7 +21,7 @@ class PaymentBillRequest extends FormRequest
      */
     public function rules(): array
     {
-        $payment_bill_id = $this->route('paymentBill.id');
+        $payment_bill_id = $this->route('payemntbill.id');
         return [
             //
             'title' => 'required|string',

@@ -106,7 +106,7 @@ class KidController extends Controller
     {
         $date = Carbon::parse($request->date);
         $followup = Followup::where('kid_id', $kid->id)->whereDate('date', $date)->firstOrFail();
-        return contentResponse($followup->load('meals', 'subjects'));
+        return contentResponse($followup->load('media','meals', 'subjects'));
     }
 
     /**

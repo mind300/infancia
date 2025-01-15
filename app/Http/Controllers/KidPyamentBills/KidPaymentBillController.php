@@ -38,9 +38,9 @@ class KidPaymentBillController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKidPaymentRequest $request, KidPaymentBill $kidPaymentBill)
+    public function update(UpdateKidPaymentRequest $request, KidPaymentBill $kidpaymentbill)
     {
-        $kidPaymentBill->update($request->validated());
+        $kidpaymentbill->update($request->validated());
         return messageResponse();
     }
 }

@@ -21,6 +21,7 @@ class Nursery extends BaseModel
         'about',
         'branches_number',
         'status',
+        'fees',
         'service_id',
         'user_id'
     ];

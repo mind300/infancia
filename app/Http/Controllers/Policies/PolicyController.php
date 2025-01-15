@@ -14,7 +14,8 @@ class PolicyController extends Controller
      */
     public function index(Request $request)
     {
-        $policies = Policy::nurseryScope($request)->get();
+        // $policies = Policy::nurseryScope($request)->get();
+        $policies = Policy::where('nursery_id', 3)->get();
         return contentResponse($policies);
     }
 

@@ -14,7 +14,7 @@ class PaymentBillController extends Controller
      */
     public function index(Request $request)
     {
-        $paymentRequest = PaymentBill::branchScope($request)->paginate(10);
+        $paymentRequest = PaymentBill::branchScope($request)->get();
         return contentResponse($paymentRequest);
     }
 
@@ -39,19 +39,19 @@ class PaymentBillController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PaymentBillRequest $request, PaymentBill $paymentBill)
+    public function update(PaymentBillRequest $request, PaymentBill $payemntbill)
     {
-        $paymentBill->update($request->validated());
-        $paymentBill->kids()->sync(collect($request->validated('kids'))->pluck('id'));
+        $payemntbill->update($request->validated());
+        $payemntbill->kids()->sync(collect($request->validated('kids'))->pluck('id'));
         return messageResponse();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PaymentBill $paymentBill)
+    public function destroy(PaymentBill $payemntbill)
     {
-        $paymentBill->forceDelete();
+        $payemntbill->forceDelete();
         return messageResponse();
     }
 }

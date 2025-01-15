@@ -52,11 +52,11 @@ class BranchController extends Controller
      */
     public function main(Branch $branch)
     {
-        $test = Branch::where('nursery_id', 1)->update(['main' => 0]);
+        Branch::where('nursery_id', $branch->nursery_id)->update(['main' => 0]);
         $branch->main = 1;
         $branch->save();
         return messageResponse();
-    } 
+    }
 
     /**
      * Remove the specified resource from storage.
