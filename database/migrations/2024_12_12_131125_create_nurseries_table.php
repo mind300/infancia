@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('address');
             $table->longText('about')->nullable();
             $table->integer('branches_number')->default(0);
+            $table->integer('start_fees')->default(0);
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->boolean('generate_branch')->default(false);
             $table->integer('rates')->default(0);

@@ -31,6 +31,7 @@ class NurseryRequest extends FormRequest
             'city' => 'nullable|string',
             'address' => 'nullable|string',
             'about' => 'nullable|string',
+            'start_fees' => 'nullable|integer',
             'branches_number' => 'nullable|integer',
             'generate_branch' => 'nullable|boolean',
             'services' => 'nullable|array',

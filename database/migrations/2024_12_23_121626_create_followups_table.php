@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('followups', function (Blueprint $table) {
             $table->id();
-            $table->time('napping')->default(0);
+            $table->string('napping')->default("0");
             $table->integer('daiper')->default(0);
             $table->integer('potty')->default(0);
             $table->integer('toilet')->default(0);
